@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+header {
+	
+	background-color: #A4CD0C;
+	margin: 0;
+	padding: 0.8rem;
+	color: white;
+	/* offset-x offset-y blur-radiu color  x축, y축 붕띄우기*/
+	/* offset-x와 offset-y 는 필수 지정갑, blur는 지정하지 않으면 0 */
+	text-shadow: 2px 2px 2px gray;
+
+}
+
+nav {
+	
+	margin: 0;
+	padding: 0;
+	background-color: #3eb5ff;
+	color: #fff;	
+	
+}
+
+nav ul {
+	
+	display: flex;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	
+}
+
+nav ul a {
+	
+	display: block;
+	color: inherit;
+	padding: 14px 16px;
+	text-decoration: none;
+	/* tag에 action을 지정할 때 변화되는 시간 간격을 조절하여 부드럽게 변하는 효과를 내기 */
+	transition: 0.5s;
+	
+}
+
+nav ul a:hover {
+	
+	background-color: #ddd;
+	color: black;
+	font-weight: bold;
+	
+}
+

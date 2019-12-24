@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+*,html,body {
+	margin:0;
+	padding:0;
+}
+html, body{
+	
+	width: 100%;
+	height: 100%;
+	
+}
+
+header {
+	background-color: lightblue;
+	color: white;
+	margin: 0;
+	padding: 1rem;
+}
+
+nav ul {
+	display: flex;
+	background-color: black;
+	color: white;
+	list-style: none;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+nav ul a {
+	/* a tag가 가지고 있는 기본 색상은 무시하고 현재 a tag를 감싸고 있느 box에 color가 설정되어 있으면
+	그 color를 가져와서 세팅하라 */
+	color: inherit;
+	/* 원래 a tag는 inline 속성을 가지고 있어서 width등의 값을 설정해도
+		그 속성을 무시해버림.
+		a tag를 block(box)성질을 갖도록 만드는 코드 */
+	display: block;
+	/* padding과 margin 설정하기 : 네개의 값은 각각 top right bottom left(TRBL) 시계방향 */
+	padding: 14px 16px 14px 16px;
+	/* padding: 14px, 16px; */
+	/* 두개만 썼을때는 top/bottom : 14px, right/left : 16px   한개만 넣으면 상하좌우 모두*/
+	/* margin : 박스 바깥쪽 여백
+		   padding : 박스 안쪽 여백 */
+}
+
+nav ul a:hover {
+	background-color: #ddd;
+	color: black;
+}

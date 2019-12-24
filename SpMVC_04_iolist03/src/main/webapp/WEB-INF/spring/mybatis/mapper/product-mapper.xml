@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.biz.iolist.persistence.ProductDao">
+ 
+ 	<select id="selectAll" resultType="ProDTO">
+ 		SELECT * FROM tbl_product
+ 	</select>
+ 	
+ 	<select id="getAllList" resultType="ProDTO">
+ 		SELECT * FROM tbl_product
+ 	</select>
+ 	
+ 	<select id="findById" resultType="ProDTO">
+ 		
+ 		SELECT * FROM tbl_product
+ 		WHERE P_CODE = #{p_code}
+ 	
+ 	</select>
+ 	
+ 	<select id="getMaxCode" resultType="ProDTO">
+ 	
+ 		SELECT MAX(p_code) FROM tbl_product
+ 		
+ 	</select>
+ 	
+ 	<insert id="insert">
+ 	
+ 	</insert>
+ 	
+ 	<update id="update">
+ 	
+ 	</update>
+ 	
+ 	<delete id="delete">
+ 	
+ 	</delete>
+ 
+ </mapper> 

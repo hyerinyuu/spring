@@ -1,0 +1,29 @@
+package com.biz.product.domain;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+/*
+ * 여러개의 이미지파일을 업로드했을 때
+ * 해당 파일에 대한 정보를 저장해 dbms에 전달하기 위한 DTO 클래스
+ */
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class ProFileDTO {
+
+	private long file_seq;
+	private String file_p_code;
+	private String file_origin_name;
+	private String file_upload_name;
+	
+	
+	
+}
