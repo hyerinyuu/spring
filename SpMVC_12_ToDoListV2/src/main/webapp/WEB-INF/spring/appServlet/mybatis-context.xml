@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!--  dataSource -->
+	<bean id="ds" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+		<property name="url"  value="jdbc:oracle:thin:@127.0.0.1:1521:xe"/>
+		<property name="username"  value="iouser"/>
+		<property name="password"  value="iouser"/>
+	</bean>
+	
+	<!--  sqlSessionFactory -->
+	<!-- 
+		[mapUnderscoreToCamelCase]
+		: DB table의 칼럼 이름을 under Score가 붙은 snake case로 작성을 하고,
+		domain class의 필드 변수는 camel case로 작성을 했을 때
+		mybatis에서 데이터를 가져오기 할 때 자동 변경하여 mapping을 수행하라
+		
+			table			damain
+		===============================
+		   td_seq  			 tdSeq
+		   td_date			 tdDate
+		===============================   	
+	 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="ds"/>
+		<property name="typeAliasesPackage" value="com.biz.todo.domain" />
+	</bean>
+	
+	<tx:annotation-driven/>
+	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="ds"/>
+	</bean>
+	
+	<mybatis-spring:scan base-package="com.biz.todo.repository"/>
+</beans>

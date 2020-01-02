@@ -7,6 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <title>나의 홈페이지</title>
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+
+<script>
+$(function(){
+	$("#login").click(function(){
+		$("#myModal").css("display","block")
+	})
+})
+</script>
 <style>
 	*{
 		margin: 0;
@@ -42,6 +51,16 @@
 		text-decoration: line-through;
 	}
 	
+	li#login {
+		cursor: pointer;
+		display: inline-block;
+		padding: 10px 20px;
+	}
+	
+	li#login:hover {
+		background-color: #ddd;
+	}
+	
 	
 
 </style>
@@ -52,22 +71,34 @@
 	<h3>TO DO List</h3>
 </header>
 
+<nav>
+	<ul>
+		<li id="login">Login</li>
+	</ul>
+</nav>
+
 <section>
 	<article id="input">
-		<form method="POST"> 
-			<table class="input">
+		<form method="POST">
+		 
+			<input class="input" type="hidden" name="td_seq" value='<c:out value="${todoDTO.td_seq}" default="0"/>'>
+			<input class="input" type="hidden" name="td_complete" value="${todoDTO.td_complete}">
+			<input class="input" type="hidden" name="td_date" value="${todoDTO.td_date}">
+			<input class="input" type="hidden" name="td_time" value="${todoDTO.td_time}">
+
+			<table class=input>
 				<tr>
 					<td>
 						<label>중요도</label>
-						<input id="tdFlag" type="number" min="1" max="5" value="1" name="tdFlag">
+						<input id="tdFlag" type="number" min="1" max="5" value='<c:out value="${todoDTO.td_flag}" default="1" />' name="td_flag">
 					</td>
 					
 					<td>	
-						<input type="text" name="tdSubject">
+						<input type="text" value="${todoDTO.td_subject}" name="td_subject">
 					</td>
 					
 					<td>
-						<input type="checkbox" id="tdAlarm" name="tdAlarm" value="Y">
+						<input type="checkbox" id="tdAlarm" name="td_alarm" <c:if test="${todoDTO.td_alarm == 'Y'}" > checked="checked"</c:if> value="Y">
 						<label for="tdAlarm">알람설정</label>
 					</td>
 					
@@ -96,23 +127,23 @@
 			<c:forEach items="${todoList}" var="todo" varStatus="index">
 				<tr>
 					<td>${index.count}</td>
-					<td>${todo.tdFlag}</td>
-					<td<c:if test="${todo.tdComplete == 'Y'}"> class="line-thourgh"</c:if>>${todo.tdSubject}</td>
+					<td>${todo.td_flag}</td>
+					<td<c:if test="${todo.td_complete == 'Y'}"> class="line-thourgh"</c:if>>${todo.td_subject}</td>
 					
 					<td>
-						<a href="${rootPath}/complete?tdSeq=${todo.tdSeq}&tdComplete=${todo.tdComplete}">	
-							${todo.tdComplete}
+						<a href="${rootPath}/complete?tdSeq=${todo.td_seq}&tdComplete=${todo.td_complete}">	
+							${todo.td_complete}
 						</a>
 					</td>
 					
 					<td>
-						<a href="${rootPath}/alarm?tdSeq=${todo.tdSeq}&tdAlarm=${todo.tdAlarm}">
-							${todo.tdAlarm}
+						<a href="${rootPath}/alarm?tdSeq=${todo.td_seq}&tdAlarm=${todo.td_alarm}">
+							${todo.td_alarm}
 						</a>
 					</td>
 					<td>
-						<a href="${rootPath}/update?tdSeq=${todo.tdSeq}">수정</a>
-						<a href="${rootPath}/delete?tdSeq=${todo.tdSeq}">삭제</a>
+						<a href="${rootPath}/update?tdSeq=${todo.td_seq}">수정</a>
+						<a href="${rootPath}/delete?tdSeq=${todo.td_seq}">삭제</a>
 					</td>	 
 				</tr>
 			</c:forEach>		
@@ -122,6 +153,6 @@
 	</article>
 	
 </section>
-	
+<%@ include file="/WEB-INF/views/modal-box.jsp" %>	
 </body>
 </html>
