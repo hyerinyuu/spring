@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ToDoController {
 	
 	// interface를 implement해서 사용하다가 version upgrade를 위해 extends해서 Service가 2개 이상이 되는 경우 사용함.
-	// ToDoService interface를 toServiceV2를 객체로 toService라고 명명하여 사용하겠다는 의미
+	// ToDoService interface를 toServiceV3를 객체로 toService라고 명명하여 사용하겠다는 의미
 	@Autowired
 	@Qualifier("todoV3")
 	ToDoService toService;
