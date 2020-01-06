@@ -15,8 +15,15 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.0/jquery.contextMenu.min.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.0/jquery.contextMenu.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.0/jquery.ui.position.min.js"></script>
-<script>
 
+<script>
+	var rootPath = "${rootPath}"
+</script>
+
+<script src="${rootPath}/javascript/img_upload.js"></script>
+<script src="${rootPath}/javascript/imgs_upload.js"></script>
+
+<script>
 $(function(){
 	
 	var toolbar = [
@@ -39,6 +46,7 @@ $(function(){
 		width: '100%',
 		toolbar: toolbar,
 		height: '200px',
+		disableDragAndDrop: true,
 	})
 	
 	
@@ -60,46 +68,94 @@ $(function(){
 		
 		// drop한 파일 리스트 추출(여러개)
 		let files = e.originalEvent.dataTransfer.files
-		
-		// 리스트의 첫번째 파일만 추출(한개)
-		let file = files[0]
 
-		// 추출된 파일 정보를 서버에 먼저 upload
-		
-		// js FormData 클래스를 사용해서 서버에 파일 업로드 준비
-		// (파일은 용량이 커서 js만으로 다루기 힘들어서_)
-		let formData = new FormData()
-		formData.append('file', file)
-		
-		$.ajax({
-			url : '${rootPath}/rest/file_up',
-			method : 'POST',
-			data : formData,
-			// 내가 올리는 데이터를 특별한 방법으로 가공하지 마라(processData와 contentType은 파일업로드시 필수옵션)
-			processData: false,
-			contentType: false,
+		// 멀티파일업로드
+		let fileLen = files.length
+		if(fileLen > 1){
 			
-			success : function(result){
-				if(result == 'FAIL'){
-					alert("파일 업로드 오류")
-				}else{
-					$("#img_file").val(result)
-					$("#img_view").css("display", "block")
-					$("#img_view").attr("src", '${rootPath}/images/' + result)
-					$("#d_d_box h3").text("파일 업로드 성공!")
-				}
-			},
+			// 멀티파일업로드를 위한 객체 생성
+			let formData = new FormData()
 			
-			error: function() {
-				alert("서버 통신 오류")
+			// drop한 파일들을 모두 추가
+			for(let i = 0; i < files.length ; i++){
+
+				// file을 하나씩 append(for문으로 파일 개수만큼 반복)
+				formData.append('files', files[i])
 			}
-		})
+			files_up(formData)
+			return false;
 		
+		// 싱글파일업로드	
+		}else{
+			// 리스트의 첫번째 파일만 추출(한개)
+			let file = files[0]
+	
+			// 추출된 파일 정보를 서버에 먼저 upload
+			// js FormData 클래스를 사용해서 서버에 파일 업로드 준비
+			// (파일은 용량이 커서 js만으로 다루기 힘들어서_)
+			let formData = new FormData()
+			formData.append('file', file)
+			
+			file_up(formData)
+		}
 		return false;
 	})
 	
+	var contextCallBack = function(key, options){
+		if(key == 'edit'){
+			
+			let img_seq = $(this).attr("data-seq");
+			document.location.href = "${rootPath}/image/update/" + img_seq
+			
+		}
+		
+		if(key == 'delete'){
+			if(confirm("이미지를 삭제할까요?")) {
+				let img_seq = $(this).attr("data-seq");
+				
+				/* delete가 현재 get방식이라서 주소창에 delete + seq를 임의로 적어도 삭제가 되는 상태이므로
+				type을 post로 변경해서 update */
+				$.ajax({
+					url : "${rootPath}/image/delete",
+					// data : img_seq
+					// data : img_seq = 3
+					data : {img_seq : img_seq},
+					type: 'POST',
+					success : function(result){
+						if(result < 1)
+							alert("삭제도중 문제 발생")
+					},
+					error : function(){
+						alert("서버 통신 오류")
+					}
+				})
+				// 새로고침해서 home으로 가라
+				document.location.replace("${rootPath}/")
+				
+				// 이벤트 버블링 금지
+				return false;
+				
+				
+				// GET 방식
+				//  : document.location.href = "${rootPath}/image/delete/" + img_seq
+			}
+		}
+	}
+	
+	/*
+	jquery응용
+	마우스를 제어해서 contextMenu(오른쪽 마우스 클릭시 표시할 메뉴)를
+	만들어 주는 tool
+	*/
 	$.contextMenu({
+		/*
+		.img_card를 클릭(select)하면 edit와 delete 메뉴를 표시해라
+		*/
 		selector:'.img_card',
+		/*
+		마우스로 클릭하면 CallBack이라는 함수를 실행하라
+		*/
+		callback : contextCallBack,
 		items : {
 			'edit' : {name:'수정', icon: 'edit'},
 			'delete' : {name:'삭제', icon: 'delete'},
@@ -107,7 +163,7 @@ $(function(){
 		
 	})
 
-
+	
 })	
 </script>
 
@@ -129,7 +185,13 @@ $(function(){
 		color: white;
 	}
 	
+	section{
+		width: 90%;
+		margin: 10px auto;
+	}
+	
 	#img_box{
+		margin: 10px auto;
 		border: 1px solid green;
 		display: flex;
 		flex-wrap: wrap;
@@ -145,7 +207,19 @@ $(function(){
 		width: 200px;
 		height: 200px;
 		margin: 10px;
+		
+		/* 이미지가 cardBox보다 클 때 이미지 자르기 */
+		overflow: hidden;
+		
+		display: flex;
+		justify-content: center;
+		flex-flow: column;
 		box-shadow: 0 4px 10px 0 rgba(0,0,0,0.16), 0 4px 20px 0 rgba(0,0,0,0.19);
+	}
+	
+	.img_card .img_title {
+		padding: 0.5rem;
+		text-align: center;
 	}
 	
 	.bz-button{
@@ -164,6 +238,11 @@ $(function(){
 	
 	.bz-button:hover{
 		box-shadow: 0 8px 16px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2);
+	}
+	
+	a{
+		text-decoration: none;
+		color: inherit;
 	}
 	
 	div.input_box {
@@ -197,8 +276,6 @@ $(function(){
 	
 	#img_view {
 		display: none;
-		
-	
 	}
 	
 </style>
