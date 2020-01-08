@@ -1,0 +1,35 @@
+// 전통적인 방식
+function funca(text){
+	alert("나는 function A 입니다." + text)
+	
+}
+
+// 2012년 이후 방식
+// const == var
+// 함수를 변수 선언하는 것처럼 만드는 바업
+// 함수를 변수로 선언 = 객체를 변수로 선언하는 것과 같은 원리임
+// 함수를 변수로 선언 가능한 몇가지 언어가 있음
+// js는 함수를 변수로 선언하는 대표적인 문법을 가진 언어임
+// js의 함수를 1급 함수라고 표현함.
+const funcb = function(test){
+	alert("나는 function B 입니다.")
+	
+}	
+
+//  화살표 함수
+// JS 2015 이상 버전에서만 사용 가능
+var funcc = () -> {
+	alert("나는 function C 입니다.")
+}
+
+var funcd = (test) -> {
+	alert("나는 func d 입니다.")
+}
+
+
+function tuncTest(){
+	funca("우리나라")
+	funcb("Republic of Korea")
+	
+}
+
