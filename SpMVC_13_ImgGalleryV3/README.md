@@ -58,5 +58,50 @@
 * <input name="main[1].title" value="2번">
 * <input name="main[2].title" value="3번">
 
+### HttpSession 데이터의 흐름
+* [HTTP의 StatusLess 특성] 
+HTTP(Hyper Text Transfer Protocol)에서 request가 이루어지고 결과를 response하게 되면 
+web browser와 server간에 어떠한 정보도 남지 않는 특성
+
+* 통신에서는 같은 client(web browser)에서 같은 주소로 서버에 자주 request를 수행하는 경우가 많다.
+
+* 이때 client가 요청한 request에 대한 정보를 server가 참조하고 싶을 때가 있다. 
+(대표적인 예가 로그인한 정보)
+
+* 과거에는 cookie라는 것을 사용해서 사용자가 로그인을 수행하면 
+그 사용자의 로그인 정보를 cookie라는 데이터 형태로 만들어서 client에게 보내면,
+client는 어딘가에 그 정보를 저장해 두었다가
+
+* 다시 request를 수행할 때 cookie를 request 정보에 담아서 같이 전송을 했다.
+* 서버에서는 request 정보에 cookie가 담겨 있으면 그 정보를 분석하여
+* client로부터 보내온 정보를 분석하여 행동을 결정했다.
+* cookie라는 정보가 보통 암호화 되지 않고, 누구나 열어볼 수 있는 형태가 많다.
+즉, 해커가 중간에 정보를 가로채서 cookie정보가 노출되는 등의 형태로 민감한 개인정보의 누출이 매우 쉽다.
+
+* 이러한 단점을 보완하기 위해서 Session이라는 개체 개념이 도입되었고,
+Java 기반 서버(WAS)에서는 HttpSession 클래스를 만들어 쉽게 Session을 관리할 수 있도록 하고 있다.
+
+* 서버는 필요할 때 HttpSession객체에 Attribute를 추가하면 Java에서 사용할 수 있는 어떤 데이터라도 
+Session 형태로 만들어서 사용할 수 있다.
+
+* httpSession.setAttribute("MEMBER", memberVO) 형식의 코드를 작성하면
+memberVO 객체에 담긴 모든 데이터가 서버 기억장치 어딘가에 보관이 되고,
+MEMGER라는 이름으로 Session ID가 생성된다.
+
+* 이 Session ID는 자체적으로 특별한 방법을 통해 암호화된 값으로 변환되며,
+* 서버에서 response를 수행하면 자동으로 response Body에 이 Session ID값이 추가되어 client로 보내진다.
+
+* 이때 client는 수신된 response 정보에 Session ID가 있으면 cookie영역에 이 ID를 임시보관하며
+* 이후에 client에서 request를 보낼 때 이 Session ID를 첨가하여 서버로 보낸다.
+
+* 서버(Spring)에서는 request 정보에 Session ID가 있으면 해당 Session객체를 메모리에서 찾아보고 
+* Session ID가 유효하면 그 객체를 controller의 method에 주입한다.
+
+* Controller의 method에서는 HttpSession httpSession형식의 매개변수를 선언해 두면 
+해당 객체에 Session 객체 값이 담겨있어 코드에서 사용 가능하다.
+ 
+
+
+
 
 

@@ -93,43 +93,40 @@
 		$("#btn-join").click(function(){
 			document.location.href="${rootPath}/member/join"
 		})
-		
+			
 		$("btn-login").click(function(){
 			
+			// 유효성 검사
+			// id, password가 입력되지 않았을 때 경고
+			let u_id = $("#u_id").val()
+			if(u_id == ""){
+				alert("아이디를 입력하세요")
+				$("#u_id").focus
+				return false
+			}
+			
+			/*
 			var params = $("form").serialize();
 			$.ajax({
 				url : "${rootPath}/member/login",
 				type : 'POST',
 				data: params,
-				dataType: 'json',
 				success:function(result){
 					alert("로그인 성공")
 				}
 			})
-		})
-		
-		/*
-		$("#btn-login").click(function(){
-			$.post("${rootPath}/member/login",
-				$("form").serialize()},
-				function(result){
-					alert(result)
-				}
-			})
-		*/	
-		
-		/*
-		$("#btn-login").click(function(){
-			$.post("${rootPath}/member/login",
-				$("form").serialize(){
-				function(result){
-					alert(result)
-				}	
-			})
-		})
-		*/
-	})
+			*/
 
+			$.post("${rootPath}/rest/member/login",
+				$("form").serialize(),
+				function(result){
+					alert(result)
+					document.location.href=document.location.href
+				})/* } : close tag for ==> function(result){  
+					 ) : close tag for ==> $.post            */
+				
+		})/* close tag for ==> $("#btn-login").click(function(){ */
+	})
 </script>
 
 <form method="POST" action="${rootPath}/member/login" class="login-form">
@@ -153,8 +150,8 @@
 		<h3>작성자만이 볼 수 있음!!</h3>
 	</c:if>
 	
-	<input type="text" name="u_id" placeholder="userID">
-	<input type="password" name="u_password" placeholder="password">
+	<input type="text" id="u_id" name="u_id" placeholder="userID">
+	<input type="password" id="u_password" name="u_password" placeholder="password">
 	<button type="submit" id="btn-login">SIGN UP</button>
 	<button type="button" id="btn-join">SIGN IN</button>
 	

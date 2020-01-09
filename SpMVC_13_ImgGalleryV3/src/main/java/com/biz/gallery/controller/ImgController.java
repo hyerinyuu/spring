@@ -65,6 +65,8 @@ public class ImgController {
 	@RequestMapping(value="/upload", method=RequestMethod.GET)
 	public String upload(@ModelAttribute("imageVO") ImageVO imageVO, Model model, HttpSession httpSession) {
 		
+		log.debug("이미지 업로드 start");
+		/*
 		// httpSession에 Member라는 attribute를 꺼내서 MemberVO에 담겠음
 		MemberVO member = (MemberVO) httpSession.getAttribute("MEMBER");
 		if(member == null) {
@@ -72,6 +74,7 @@ public class ImgController {
 			model.addAttribute("MODAL", "LOGIN");
 			return "home";
 		}
+		*/
 		
 		imageVO = new ImageVO();
 		
@@ -104,7 +107,18 @@ public class ImgController {
 	 * 근래에는 ?변수=값 보다 이방식을 더 많이 사용
 	 */
 	@RequestMapping(value="/update/{img_seq}", method=RequestMethod.GET)
-	public String update(@PathVariable("img_seq") String img_seq, Model model) {
+	public String update(@PathVariable("img_seq") String img_seq, Model model, HttpSession httpSession) {
+		
+		/*
+		// 단순히 로그인이 되었는지만 검사할거라서 OBJECT로 세션 객체를 추출
+		Object memberVO = httpSession.getAttribute("MEMBER");
+		
+		// 로그인이 안되었으면
+		if(memberVO == null){
+			model.addAttribute("MODAL", "LOGIN");
+			return "home";
+		}
+		*/
 		
 		ImageVO imgVO = imService.findBySeq(img_seq);
 		
@@ -140,7 +154,18 @@ public class ImgController {
 	}
 	
 	@RequestMapping(value="/delete/{img_seq}", method=RequestMethod.GET)
-	public String delete(@PathVariable String img_seq, SessionStatus status) {
+	public String delete(@PathVariable String img_seq, SessionStatus status, Model model, HttpSession httpSession) {
+
+		// 단순히 로그인이 되었는지만 검사할거라서 OBJECT로 세션 객체를 추출
+		Object memberVO = httpSession.getAttribute("MEMBER");
+		
+		/*
+		// 로그인이 안되었으면
+		if(memberVO == null){
+			model.addAttribute("MODAL", "LOGIN");
+			return "home";
+		}
+		*/
 		
 		int ret = imService.delete(img_seq);
 		
@@ -169,8 +194,6 @@ public class ImgController {
 		status.setComplete();
 		return ret + "";
 	}
-		
-	
 	
 	// [MultipartHttpServletRequest mFiles] : 다중 파일 수신하기
 	// 파일 리스트를 view와 결합하여 저장 전 보여주기

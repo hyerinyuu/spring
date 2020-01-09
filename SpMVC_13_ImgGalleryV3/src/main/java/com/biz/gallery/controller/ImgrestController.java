@@ -9,8 +9,10 @@ import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,10 +22,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.biz.gallery.domain.ImageFilesVO;
 import com.biz.gallery.domain.ImageVO;
+import com.biz.gallery.domain.MemberVO;
 import com.biz.gallery.repository.ImageDao;
 import com.biz.gallery.repository.ImageFilesDao;
 import com.biz.gallery.service.FileService;
 import com.biz.gallery.service.ImageFileService;
+import com.biz.gallery.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,14 +40,17 @@ public class ImgrestController {
 	private final ImageFileService ifService;
 	private final ImageDao imgDao;
 	private final ImageFilesDao ifDao;
-
+	private final MemberService mService;
+	
+	
 	@Autowired
-	public ImgrestController(FileService fService, ImageFileService ifService, ImageDao imgDao, ImageFilesDao ifDao) {
+	public ImgrestController(FileService fService, ImageFileService ifService, ImageDao imgDao, ImageFilesDao ifDao, MemberService mService) {
 		super();
 		this.fService = fService;
 		this.ifService = ifService;
 		this.imgDao = imgDao;
 		this.ifDao = ifDao;
+		this.mService = mService;
 	}
 	
 	@RequestMapping(value="/file_up", method=RequestMethod.POST, produces="text/html;charset=UTF-8")
@@ -170,5 +177,28 @@ public class ImgrestController {
 		
 		return ret + "";
 	}
+	
+	// rest/member/login
+	@RequestMapping(value="/member/login", method=RequestMethod.POST)
+	public String login(MemberVO memberVO, Model model, HttpSession httpSession) {
+
+		// 입력받은 id가 DB에 있는 id값 중 일치하는 값이 있나 확인해보기 
+		memberVO = mService.loginCheck(memberVO);
+		
+		// Service에서 검사받은 memberVO가 null이 아니면 == 회원가입되었으면
+		if(memberVO != null) {
+			httpSession.setAttribute("MEMBER", memberVO);
+			return "LOGIN_SUCCESS";
+		// 혹시 로그인이 안되었을 경우 session 제거해줘야함
+		}else {
+			httpSession.removeAttribute("MEMBER");
+			return "LOGIN_FAILED";
+		}
+			
+		
+		
+	}
+	
+	
 
 }

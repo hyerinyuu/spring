@@ -38,6 +38,13 @@ public class MemberController {
 
 	}
 	
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public String login() {
+		
+		return "body/login";
+	}
+	
+	
 	// @ResponseBody
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(MemberVO memberVO, Model model, HttpSession httpSession) {
@@ -56,8 +63,9 @@ public class MemberController {
 		}
 			
 		return "redirect:/image/list";
-		
+	
 	}
+	
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String logout(HttpSession httpSession) {
