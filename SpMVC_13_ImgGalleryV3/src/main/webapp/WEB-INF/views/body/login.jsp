@@ -94,7 +94,7 @@
 			document.location.href="${rootPath}/member/join"
 		})
 			
-		$("btn-login").click(function(){
+		$("#btn-login").click(function(){
 			
 			// 유효성 검사
 			// id, password가 입력되지 않았을 때 경고
@@ -105,7 +105,6 @@
 				return false
 			}
 			
-			/*
 			var params = $("form").serialize();
 			$.ajax({
 				url : "${rootPath}/member/login",
@@ -113,10 +112,11 @@
 				data: params,
 				success:function(result){
 					alert("로그인 성공")
+					document.location.href=document.location.href
 				}
 			})
-			*/
 
+			/*
 			$.post("${rootPath}/rest/member/login",
 				$("form").serialize(),
 				function(result){
@@ -152,7 +152,7 @@
 	
 	<input type="text" id="u_id" name="u_id" placeholder="userID">
 	<input type="password" id="u_password" name="u_password" placeholder="password">
-	<button type="submit" id="btn-login">SIGN UP</button>
+	<button type="button" id="btn-login">SIGN UP</button>
 	<button type="button" id="btn-join">SIGN IN</button>
 	
 </form>

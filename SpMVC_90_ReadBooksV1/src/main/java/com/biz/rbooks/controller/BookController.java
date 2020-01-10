@@ -1,7 +1,5 @@
 package com.biz.rbooks.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +9,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+
 import com.biz.rbooks.domain.BookDTO;
-import com.biz.rbooks.domain.ReadBookDTO;
 import com.biz.rbooks.service.BookService;
 
-// @SessionAttributes("bDTO")
+import lombok.extern.slf4j.Slf4j;
+
+@RequestMapping("/books")
+@Slf4j
+@SessionAttributes("bDTO")
 @Controller
 public class BookController {
 
@@ -26,8 +29,14 @@ public class BookController {
 	public BookController(BookService bService) {
 		this.bService = bService;
 	}
+
+	@ModelAttribute("bDTO")
+	public BookDTO newBookDTO() {
+		
+		return new BookDTO();
+	}
 	
-	@RequestMapping(value="books/list", method=RequestMethod.GET)
+	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public String list(Model model) {
 	
 		// List<ReadBookDTO> rbList = rbService.selectAll();
@@ -37,39 +46,63 @@ public class BookController {
 		return "home";
 	}
 	
-	@RequestMapping(value="books/viewdetail", method=RequestMethod.GET)
+	@RequestMapping(value="/viewdetail", method=RequestMethod.GET)
 	public String viewdetail(@RequestParam("bcode") String b_code, @ModelAttribute("bDTO") BookDTO bDTO, Model model) {
 		
-		bDTO = bService.selectById(b_code);
+		bDTO = bService.findById(b_code);
 		model.addAttribute("bDTO", bDTO);
 		
 		return null;
 	}
 	
-	@RequestMapping(value="books/insert", method=RequestMethod.GET)
-	public String insert(@ModelAttribute("bDTO") ReadBookDTO rbDTO, Model model){
+	@RequestMapping(value="/insert", method=RequestMethod.GET)
+	public String insert(@ModelAttribute("bDTO") BookDTO bDTO, Model model, SessionStatus status){
 
-		Date date = new Date();
-		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
-		
-		// 독서날짜 setting
-		rbDTO.setRb_date(sd.format(date));
-		
-		// userID setting
-		// mDTO.setM_id(m_id);
-		
-		model.addAttribute("rbDTO", rbDTO);
+		// ISBN 자동생성해서 넣는 코드 추가하기
+		// 도서코드가 일치하는 도서에 insert를 수행하면 insert막아주는 코드 (ajax로 Stirng Yes No 식으로 보내기)
+		// code check 따로 만들어야함
+
+		model.addAttribute("bDTO", bDTO);
+		status.setComplete();
 		return "books/insert";
 	}
 	
-	@RequestMapping(value="books/insert", method=RequestMethod.POST)
-	public String insert(@ModelAttribute("bDTO") BookDTO bDTO, Model model) {
+	@RequestMapping(value="/insert", method=RequestMethod.POST)
+	public String insert(@ModelAttribute("bDTO") BookDTO bDTO, SessionStatus status) {
 		
-		int ret = bService.insert(bDTO);
+		bService.insert(bDTO);
+		
+		log.debug("###insert 값" + bDTO.toString());
+		
+		status.setComplete();
+		return "redirect:/books/list";
+	}
+	
+	@RequestMapping(value="/update", method=RequestMethod.GET)
+	public String update(@ModelAttribute("bDTO") BookDTO bDTO, Model model, @RequestParam("id") String b_code) {
+		
+		bDTO = bService.findById(b_code);
+		model.addAttribute("bDTO", bDTO);
+		
+		return "books/insert";
+	}
+
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public String update(@ModelAttribute("bDTO")BookDTO bDTO, SessionStatus status) {
+		
+		bService.update(bDTO);
+		status.setComplete();
 		
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value="/delete")
+	public String delete(@ModelAttribute("bDTO") BookDTO bDTO) {
+
+		bService.delete(bDTO.getB_code());
+		
+		return "redirect:/books/list";
+	}
 	
 	
 }

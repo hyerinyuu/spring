@@ -53,21 +53,17 @@
 		})
 		
 		$("#btn-update").click(function(){
-			let bcode = $(this).attr("data-id")
-			if(confirm(bcode + "도서정보를 수정하시겠습니까?"))
-			document.location.href = "${rootPath}/update"
+			
+			if(confirm("도서정보를 수정하시겠습니까?"))
+			document.location.href = "${rootPath}/books/update?id=${bDTO.b_code}"
 		})
 		
 		$("#btn-delete").click(function(){
-			let bcode = $(this).attr("data-id")
-			if(confirm("도서정보를 삭제하시겠습니까")){
-				
-			}
+			if(confirm("도서정보를 삭제하시겠습니까?"))
+			document.location.replace("${rootPath}/books/delete?id=${bDTO.b_code}")	
 			
 		})
-		
 	})
-	
 
 </script>
 </head>

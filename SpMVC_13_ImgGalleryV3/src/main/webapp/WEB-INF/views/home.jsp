@@ -133,8 +133,11 @@ $(function(){
 							// server에 delay가 생겨도 곧바로 replace 되지 않게 하기 위해 successs안에 넣음
 							document.location.replace("${rootPath}/")
 					},
-					error : function(){
-						alert("서버 통신 오류")
+					error : function(eror){
+						if(error.status == 403){
+							alert("삭제권한이 없습니다")
+							return false;
+						}
 					}
 				})
 				// 이벤트 버블링 금지

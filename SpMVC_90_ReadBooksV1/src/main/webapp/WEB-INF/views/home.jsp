@@ -26,7 +26,7 @@
 $(function(){
 	
 	$("#btn-insert").click(function(){
-		document.location.href = "${rootPath}/insert"
+		document.location.href = "${rootPath}/books/insert"
 	})
 	
 	$(".content-body").click(function(){
@@ -36,7 +36,7 @@ $(function(){
 	
 })
 </script>
-
+					
 <body>
 <header>
 	<div class="jumbotron text-center">
@@ -47,7 +47,7 @@ $(function(){
 <%@ include file="/WEB-INF/views/books/list.jsp"%>
 
 
-<button type="button" id="btn-insert">독서목록 추가</button>
+<button type="button" id="btn-insert">도서정보 추가</button>
 
 
 </body>

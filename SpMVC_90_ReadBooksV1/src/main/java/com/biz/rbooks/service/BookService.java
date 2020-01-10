@@ -12,27 +12,36 @@ import com.biz.rbooks.repository.BookDao;
 public class BookService {
 
 	/* extend해서 재사용 할수도 있으니까 protected로 선언함 */
-	protected final BookDao rbDao;
+	protected final BookDao bDao;
 	
 	@Autowired
-	public BookService(BookDao rbDao) {
+	public BookService(BookDao bDao) {
 		super();
-		this.rbDao = rbDao;
+		this.bDao = bDao;
 	}
 
 	public List<BookDTO> selectAll() {
 
-		return rbDao.selectAll();
+		return bDao.selectAll();
 	}
 	
-	public BookDTO selectById(String b_code) {
-		return rbDao.selectById(b_code);
+	public BookDTO findById(String b_code) {
+		return bDao.findById(b_code);
 	}
 
 	public int insert(BookDTO bDTO) {
-		return rbDao.insert(bDTO);
+		return bDao.insert(bDTO);
 	}
 
+	public int update(BookDTO bDTO) {
+		return bDao.update(bDTO);
+	}
+
+	public int delete(String b_code) {
+		return bDao.delete(b_code);
+	}
+
+	
 	
 
 }

@@ -16,12 +16,12 @@ public class BookSQL {
 				INTO_COLUMNS("B_YEAR");
 				INTO_COLUMNS("B_IPRICE");
 				
-				INTO_VALUES("#{b_code,jdbcType=VARCHAR},");
-				INTO_VALUES("#{b_name,jdbcType=VARCHAR},");
-				INTO_VALUES("#{b_auther,jdbcType=VARCHAR},");
-				INTO_VALUES("#{b_comp,jdbcType=VARCHAR},");
-				INTO_VALUES("#{b_year,jdbcType=VARCHAR},");
-				INTO_VALUES("#{b_iprice,jdbcType=VARCHAR},");
+				INTO_VALUES("#{b_code, jdbcType=VARCHAR}");
+				INTO_VALUES("#{b_name, jdbcType=VARCHAR}");
+				INTO_VALUES("#{b_auther,jdbcType=VARCHAR}");
+				INTO_VALUES("#{b_comp, jdbcType=VARCHAR}");
+				INTO_VALUES("#{b_year, jdbcType=VARCHAR}");
+				INTO_VALUES("#{b_iprice, jdbcType=VARCHAR}");
 
 		}}.toString();
 		
@@ -33,12 +33,12 @@ public class BookSQL {
 			
 			UPDATE("tbl_books");
 			
-				WHERE("b_code = ${bcode,jdbyType=VARCHAR}");
-				SET("#{b_name,jdbcType=VARCHAR},");
-				SET("#{b_auther,jdbcType=VARCHAR},");
-				SET("#{b_comp,jdbcType=VARCHAR},");
-				SET("#{b_year,jdbcType=VARCHAR},");
-				SET("#{b_iprice,jdbcType=VARCHAR},");
+				WHERE("b_code = #{b_code}");
+				SET("b_name = #{b_name,jdbcType=VARCHAR}");
+				SET("b_auther = #{b_auther,jdbcType=VARCHAR}");
+				SET("b_comp = #{b_comp,jdbcType=VARCHAR}");
+				SET("b_year = #{b_year,jdbcType=VARCHAR}");
+				SET("b_iprice = #{b_iprice}");
 
 		}}.toString();
 		

@@ -15,7 +15,7 @@ public interface BookDao {
 	public List<BookDTO> selectAll();
 
 	@Select("SELECT * FROM tbl_books WHERE B_CODE = #{b_code}")
-	public BookDTO selectById(String b_code);
+	public BookDTO findById(String b_code);
 	
 	@InsertProvider(type = BookSQL.class, method="insert_sql")
 	public int insert(BookDTO bDTO);
@@ -23,8 +23,9 @@ public interface BookDao {
 	@UpdateProvider(type = BookSQL.class, method="update_sql")
 	public int update(BookDTO bDTO);
 	
-	@Delete("DELETE * FROM tbl_books WHERE B_CODE = #{b_code}")
+	@Delete("DELETE FROM tbl_books WHERE B_CODE = #{b_code}")
 	public int delete(String b_code);
+
 
 	
 	
