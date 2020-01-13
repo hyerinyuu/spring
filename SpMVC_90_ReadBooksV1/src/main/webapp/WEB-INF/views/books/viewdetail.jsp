@@ -102,6 +102,33 @@
 			</thead>	
 		</table>
 	</div>		
+	
+<section>
+	<div class="table-view">
+		<table class="table table-striped">
+		 	
+		 	<thead class="thead-dark">
+				<tr>
+					<th>ISBN</th><td colspan="4">${rbDTO.rb_bcode}</td>
+				</tr>
+
+				<tr>
+					<th>도서제목</th><td>${rbDTO.rb_bname}</td>
+					<th>독서일자</th><td>${rbDTO.rb_date}</td>
+				</tr>
+				
+				
+				<tr>
+					<th>한줄소감</th><td>${rbDTO.rb_subject}</td>
+				</tr>
+
+				<tr>
+					<th>별점</th><td colspan="4">${rbDTO.rb_star}</td>
+				</tr>
+				
+			</thead>	
+		</table>
+	</div>			
 	<!--  
 		<table>
 			<caption>독서기록 상세정보</caption>

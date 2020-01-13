@@ -29,6 +29,15 @@ $(function(){
 		document.location.href = "${rootPath}/books/insert"
 	})
 	
+	$("#btn-rbinsert").click(function(){
+		document.location.href = "${rootPath}/rbooks/insert"
+	})
+	
+	$("#btn-viewrblist").click(function(){
+		document.location.href = "${rootPath}/rbooks/list"
+	})
+	
+	
 	$(".content-body").click(function(){
 		let bcode = $(this).attr("data-id")
 		document.location.href="${rootPath}/books/viewdetail?bcode=" + bcode
@@ -40,7 +49,7 @@ $(function(){
 <body>
 <header>
 	<div class="jumbotron text-center">
-		<h3>독서록 리스트</h3>
+		<h3>도서 리스트</h3>
 	</div>
 </header>	
 
@@ -48,6 +57,8 @@ $(function(){
 
 
 <button type="button" id="btn-insert">도서정보 추가</button>
+<button type="button" id="btn-rbinsert">독서록 추가</button>
+<button type="button" id="btn-viewrblist">독서록 리스트 보기</button>
 
 
 </body>
