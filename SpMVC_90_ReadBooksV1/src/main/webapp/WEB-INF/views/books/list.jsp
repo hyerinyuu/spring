@@ -6,6 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>나의 홈페이지</title>
+<script>
+$(function(){
+
+	$(".content-body").click(function(){
+		let bcode = $(this).attr("data-id")
+		document.location.href="${rootPath}/books/viewdetail?bcode=" + bcode
+	})
+	
+})
+
+
+</script>
 </head>
 <body>
 <section>
@@ -19,14 +31,6 @@
 					<th>출판사</th>
 					<th>구입일자</th>
 					<th>구입가격</th>
-				<!-- 
-					<th>사용자ID</th>
-					<th>ISBN</th>
-					<th>도서제목</th>
-					<th>독서일자</th>
-					<th>한줄소감</th>
-					<th>별점</th>
-				 -->	
 				</tr>
 			</thead>	
 			

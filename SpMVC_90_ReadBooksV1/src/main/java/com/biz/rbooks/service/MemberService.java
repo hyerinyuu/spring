@@ -31,19 +31,16 @@ public class MemberService {
 	}
 
 	// 로그인했는지 확인하기 위한 method
-	public MemberDTO logincheck(MemberDTO memberDTO) {
-			
-		String m_id = memberDTO.getM_id();
-		String m_password = memberDTO.getM_password();
+	public MemberDTO logincheck(String u_id, String u_password) {
 		
 		// DB와 일치하는 아이디가 있는지 검사
-		MemberDTO loginMemberDTO = memberDao.findById(m_id);
+		MemberDTO loginMemberDTO = memberDao.findById(u_id);
 		
 		// 가입된 회원이면
 		if(loginMemberDTO != null) {
 			// 암호화된 비밀번호와 비교하기 위해서 암호화된 비밀번호 가져오기
 			String cryptPassword = loginMemberDTO.getM_password();
-			if(passwordEncoder.matches(m_password, cryptPassword)) {
+			if(passwordEncoder.matches(u_password, cryptPassword)) {
 				return loginMemberDTO;
 			}
 			

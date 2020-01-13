@@ -93,7 +93,6 @@
 	
 	<input type="text" name="m_id" placeholder="userID">
 	<input type="password" name="m_password" placeholder="password">
-	<input type="password" name="m_repassword" placeholder="password check">
 
 	<button>JOIN</button>
 	

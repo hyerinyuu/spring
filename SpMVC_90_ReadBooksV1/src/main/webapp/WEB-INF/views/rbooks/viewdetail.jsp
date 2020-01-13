@@ -41,34 +41,26 @@
 		/* border: 2px solid black; */
 		box-shadow: 5px 5px 8px rgba(80,80,80,0.8)
 	}
-	
-	.jumbotron{
-		margin-bottom: 0;
-	}
-	
-	.nav-box{
-		margin-bottom: 50px;
-	}
 
 </style>
 
 <script>
 	$(function(){
 		
-		// 도서 리스트로 다시 돌아가는 '목록으로' 버튼 클릭시 script
+		// 독서 리스트로 다시 돌아가는 '목록으로' 버튼 클릭시 script
 		$("#btn-list").click(function(){
-			document.location.href = "${rootPath}/books/list"
+			document.location.href = "${rootPath}/rbooks/list"
 		})
 		
 		$("#btn-update").click(function(){
 			
-			if(confirm("도서정보를 수정하시겠습니까?"))
-			document.location.href = "${rootPath}/books/update?id=${bDTO.b_code}"
+			if(confirm("독서록 정보를 수정하시겠습니까?"))
+			document.location.href = "${rootPath}/rbooks/update?id=${rbDTO.rb_seq}"
 		})
 		
 		$("#btn-delete").click(function(){
-			if(confirm("도서정보를 삭제하시겠습니까?"))
-			document.location.replace("${rootPath}/books/delete?id=${bDTO.b_code}")	
+			if(confirm("독서록 정보를 삭제하시겠습니까?"))
+			document.location.replace("${rootPath}/rbooks/delete?id=${rbDTO.rb_seq}")	
 			
 		})
 	})
@@ -79,7 +71,7 @@
 
 <header>
 	<div class="jumbotron text-center">
-		<h3>도서 상세정보</h3>
+		<h3>독서록 상세정보</h3>
 	</div>
 </header>	
 <%@ include file="/WEB-INF/views/main-nav.jsp" %>
@@ -90,33 +82,39 @@
 		 	
 		 	<thead class="thead-dark">
 				<tr>
-					<th>ISBN</th><td colspan="4">${bDTO.b_code}</td>
+					<th>ISBN</th><td colspan="1">${rbDTO.rb_bcode}</td>
+					<th>도서명</th><td colspan="4">${rbDTO.rb_bname}</td>
 				</tr>
 				
 				<tr>
-					<th>도서명</th><td>${bDTO.b_name}</td>
-					<th>저자</th><td>${bDTO.b_auther}</td>
+					<th>독서날짜</th><td>${rbDTO.rb_date}</td>
+					<th>독서 시작시간</th><td colspan="2">${rbDTO.rb_stime}</td>
+					<th>총 독서시간</th><td colspan="3">${rbDTO.rb_rtime}</td>
 				</tr>
 				
+				<tr>
+					<th>한줄평</th><td colspan="6">${rbDTO.rb_subject}</td>
+				</tr>
 				
 				<tr>
-					<th>출판사</th><td>${bDTO.b_comp}</td>
-					<th>구입일자</th><td>${bDTO.b_year}</td>
+					<th>소감</th><td colspan="6">${rbDTO.rb_text}</td>
 				</tr>
 
 				<tr>
-					<th>구입가격</th><td colspan="4">${bDTO.b_iprice}</td>
+					<th>별점</th><td colspan="6">${rbDTO.rb_star}</td>
 				</tr>
 				
 			</thead>	
 		</table>
 	</div>	
-</section>
+</section>		
 
 <div class="btn-box"> 
 	<a href="javascript:void(0)" class="btn" id="btn-update">수정</a>
 	<a href="javascript:void(0)" class="btn" id="btn-delete">삭제</a>
 	<a href="javascript:void(0)" class="btn" id="btn-list">목록으로</a>
 </div>
+
+
 </body>
 </html>

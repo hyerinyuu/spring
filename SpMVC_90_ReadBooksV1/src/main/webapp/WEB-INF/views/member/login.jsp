@@ -113,8 +113,10 @@
 				type : 'POST',
 				data: params,
 				success:function(result){
-					alert("로그인 성공")
-					document.location.href=document.location.href
+					if(result == "LOGIN_OK"){
+						document.location.href="${rootPath}/"
+					}
+					 
 				}
 			})
 			
@@ -145,7 +147,7 @@
 	
 	<input type="text" id="u_id" name="u_id" placeholder="userID">
 	<input type="password" id="u_password" name="u_password" placeholder="password">
-	<button type="button" id="btn-login">SIGN UP</button>
+	<button type="submit" id="btn-login">SIGN UP</button>
 	<button type="button" id="btn-join">SIGN IN</button>
 	
 </form>

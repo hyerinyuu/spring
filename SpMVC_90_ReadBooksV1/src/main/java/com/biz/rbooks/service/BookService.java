@@ -40,8 +40,6 @@ public class BookService {
 	public int delete(String b_code) {
 		return bDao.delete(b_code);
 	}
-
-	
 	
 
 }
