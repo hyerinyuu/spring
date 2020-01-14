@@ -7,7 +7,10 @@ import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.UpdateProvider;
 
+<<<<<<< HEAD
 import com.biz.rbooks.domain.BookDTO;
+=======
+>>>>>>> e58f25e4f22b7e4b15d9ec7f7e0cb6c89fe87e93
 import com.biz.rbooks.domain.ReadBookDTO;
 
 public interface ReadBookDao {
@@ -27,8 +30,11 @@ public interface ReadBookDao {
 	@Delete("DELETE tbl_read_book WHERE RB_SEQ = #{rb_seq}" )
 	public int delete(long rb_seq);
 
+<<<<<<< HEAD
 	@Select("SELECT * FROM tbl_read_book WHERE RB_SEQ = #{rb_seq}")
 	public ReadBookDTO findBySeq(String rb_seq);
 
+=======
+>>>>>>> e58f25e4f22b7e4b15d9ec7f7e0cb6c89fe87e93
 	
 }

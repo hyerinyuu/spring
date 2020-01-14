@@ -110,7 +110,61 @@
 				
 			</thead>	
 		</table>
+<<<<<<< HEAD
 	</div>	
+=======
+	</div>		
+	
+<section>
+	<div class="table-view">
+		<table class="table table-striped">
+		 	
+		 	<thead class="thead-dark">
+				<tr>
+					<th>ISBN</th><td colspan="4">${rbDTO.rb_bcode}</td>
+				</tr>
+
+				<tr>
+					<th>도서제목</th><td>${rbDTO.rb_bname}</td>
+					<th>독서일자</th><td>${rbDTO.rb_date}</td>
+				</tr>
+				
+				
+				<tr>
+					<th>한줄소감</th><td>${rbDTO.rb_subject}</td>
+				</tr>
+
+				<tr>
+					<th>별점</th><td colspan="4">${rbDTO.rb_star}</td>
+				</tr>
+				
+			</thead>	
+		</table>
+	</div>			
+	<!--  
+		<table>
+			<caption>독서기록 상세정보</caption>
+	
+				<tr>
+					<th>No</th><td>${rbDTO.b_code}</td>
+					<th>도서코드</th><td>${rbDTO.b_name}</td>
+					<th>독서일자</th><td>${rbDTO.b_auther}</td>
+				</tr>
+				
+				<tr>
+					<th>독서시작시각</th><td>${rbDTO.b_comp}</td>
+					<th>독서시간</th><td>${rbDTO.h_year}</td>
+				</tr>
+				
+				<tr>
+					<th>한줄소감</th><td>${rbDTO.b_comp}</td>
+					<th>긴줄소감</th><td>${rbDTO.h_year}</td>
+					<th>별점</th><td>${rbDTO.h_year}</td>
+				</tr>
+		</table>
+	 -->
+
+>>>>>>> e58f25e4f22b7e4b15d9ec7f7e0cb6c89fe87e93
 </section>
 
 <div class="btn-box"> 
