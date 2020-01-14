@@ -77,7 +77,6 @@ $(function(){
 
 					<c:otherwise>
 						<c:forEach items="${RBLIST}" var="rbdto" varStatus="status">
-							<c:if test="${memberDTO != null && memberDTO.m_id != null && memberDTO.m_id == rbDTO.rb_id}">
 								<tr class="content-body" data-id="${rbdto.rb_seq}">
 									<td>${status.count}</td>
 									<td>${memberDTO.m_id}</td> 
@@ -87,7 +86,6 @@ $(function(){
 									<td>${rbdto.rb_subject}</td>
 									<td>${rbdto.rb_star}</td>
 								</tr>
-							</c:if>	
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>

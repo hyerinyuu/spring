@@ -19,7 +19,6 @@ import lombok.extern.slf4j.Slf4j;
  *  2. member Session을 확인하기 위해서 attribute를 추출해서 object 객체에 담기
  *  4. null 검사(=회원 정보 없어서 로그인 실패)
  *  login-context.xml에 path와 exclude path 지정해주기
- * 
  */
 @Slf4j
 public class AuthInterceptor extends HandlerInterceptorAdapter{

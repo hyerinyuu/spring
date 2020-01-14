@@ -1,0 +1,44 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+
+<script>
+
+$(function(){
+	$(".menu-item").click(function(){
+		let menu_text = $(this).text()
+		let menu_href = "${rootPath}/"
+		
+		if(menu_text == 'BookList'){
+			menu_href += "book/list"
+		}else if(menu_text == 'LogIn'){
+			menu_href += "member/login"
+		}else if(menu_text == 'SignUp'){
+			menu_href += "member/join"
+		}else if(menu_text == 'LogOut'){
+			menu_href += "member/logout"
+		}
+		document.location.href = menu_href
+	})
+
+})
+
+</script>
+<nav>
+	<ul id="main-menu">
+		<li class="menu-item">Home</li>
+		<li class="menu-item">BookList</li>
+		
+		<c:if test="${empty MEMBER}" >
+			<li class="menu-item flex-right">LogIn</li>
+			<li class="menu-item">SignUp</li>
+		</c:if>
+		
+		<c:if test="${!empty MEMBER}" >
+			<li class="menu-item flex-right">LogOut</li>
+			<li class="menu-item">(사용자ID)</li>
+		</c:if>	
+		
+	</ul>
+</nav>

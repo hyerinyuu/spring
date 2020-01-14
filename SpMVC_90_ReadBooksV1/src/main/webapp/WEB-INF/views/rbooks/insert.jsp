@@ -36,10 +36,10 @@
 	<input name="rb_seq" type="hidden" value="<c:out value="${rbDTO.rb_seq}" default="0"/>">
 	
 		<label for="rb_bcode">ISBN</label>
-		<form:input path="rb_bcode" class="form-control" id="rb_bcode" placeholder="도서코드를 입력하세요"/><br/>
+		<form:input path="rb_bcode" class="form-control" placeholder="도서코드를 입력하세요"/><br/>
 		
 		<label for="rb_bname">도서명</label>
-		<form:input path="rb_bname" class="form-control" id="rb_bname" placeholder="도서명을 입력하세요"/><br/>
+		<form:input path="rb_bname" class="form-control" placeholder="도서명을 입력하세요"/><br/>
 		
 		<label for="rb_date">독서일자</label>
 		<form:input path="rb_date" class="form-control" placeholder="독서일자를 입력하세요"/><br/>

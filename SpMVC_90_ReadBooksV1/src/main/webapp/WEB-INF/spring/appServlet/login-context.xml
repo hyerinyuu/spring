@@ -18,6 +18,10 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/books/insert"/>
 			<mvc:mapping path="/books/update/*"/>
+			<mvc:mapping path="/books/viewdetail"/>
+			<mvc:mapping path="/rbooks/insert"/>
+			<mvc:mapping path="/rbooks/update/*"/>
+			<mvc:mapping path="/rbooks/viewdetail"/>
 			<ref bean="auth" />
 		</mvc:interceptor>
 	</mvc:interceptors>

@@ -39,13 +39,12 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 			return false;
 		}
 
-		log.debug("나는 interceptor");
+		log.debug("###interceptor");
 		log.debug(msg);
 		
 		// true return
 		return super.preHandle(request, response, handler);
 	}
-
 	
 	
 }
