@@ -39,7 +39,6 @@ public class ReadBookSQL {
 			UPDATE("tbl_read_book");
 			
 				WHERE("RB_SEQ = #{rb_seq}");
-<<<<<<< HEAD
 				SET("rb_bcode = #{rb_bcode}");
 				SET("rb_bname = #{rb_bname,jdbcType=VARCHAR}");
 				SET("rb_date = #{rb_date,jdbcType=VARCHAR}");
@@ -48,16 +47,6 @@ public class ReadBookSQL {
 				SET("rb_subject = #{rb_subject,jdbcType=VARCHAR}");
 				SET("rb_text = #{rb_text,jdbcType=VARCHAR}");
 				SET("rb_star = #{rb_star,jdbcType=VARCHAR}");
-=======
-				SET("rb_bcode = #{rb_bcode,jdbctype=VARCHAR}");
-				SET("rb_bname = #{rb_bname,jdbctype=VARCHAR}");
-				SET("rb_date = #{rb_date,jdbctype=VARCHAR}");
-				SET("rb_stime = #{rb_stime,jdbctype=VARCHAR}");
-				SET("rb_rtime = #{rb_rtime,jdbctype=VARCHAR}");
-				SET("rb_subject = #{rb_subject,jdbctype=VARCHAR}");
-				SET("rb_text = #{rb_text,jdbctype=VARCHAR}");
-				SET("rb_star = #{rb_star,jdbctype=VARCHAR}");
->>>>>>> e58f25e4f22b7e4b15d9ec7f7e0cb6c89fe87e93
 
 		}}.toString();
 	}

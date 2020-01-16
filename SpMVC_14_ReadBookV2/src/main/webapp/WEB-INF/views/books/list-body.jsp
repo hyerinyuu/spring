@@ -6,28 +6,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ include file="/WEB-INF/views/include/include-head.jspf" %>
-<script>
-$(function(){
-	// ==  $("#btn-write").click(function(){})
-	$("#btn-write").click(()=>{
-		document.location.href="${rootPath}/rbook/insert"
-	})
-	
-})
 
+<script>
+
+$(function(){
+	
+	$("#search-table tr").click(function(){
+		
+		let trs = $(this).children()
+		let b_code = trs.eq(0).text()
+		let b_name = trs.eq(1).text()
+		
+		$("#rb_bcode").val(b_code)
+		$("#rb_bname").val(b_name)
+		
+		$("#modal-box").css("display", "none")
+		
+	})
+})
 </script>
 
 </head>
 <body>
 
-<header>
-	<h2>MY READ BOOK</h2>
-</header>
-
-<%@ include file="/WEB-INF/views/include/include-nav.jspf" %>
-<section id="main-list">
-	<table id="main-table">
+<section id="search-list">
+	<table id="search-table">
 		<thead>
 			<tr>
 				<th>도서코드</th>
@@ -54,14 +57,6 @@ $(function(){
 		</tbody>	
 	</table>
 </section>
-
-<section>
-	<div id="main-button">
-		<button id="btn-write" class="biz-blue flex-right" >독서록 작성</button>
-	</div>
-
-</section>
-
 </body>
 
 </html>

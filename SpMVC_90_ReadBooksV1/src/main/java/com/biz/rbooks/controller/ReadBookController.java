@@ -17,13 +17,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.biz.rbooks.domain.BookDTO;
-import com.biz.rbooks.domain.MemberDTO;
 import com.biz.rbooks.domain.ReadBookDTO;
 import com.biz.rbooks.service.BookService;
-<<<<<<< HEAD
 import com.biz.rbooks.service.MemberService;
-=======
->>>>>>> e58f25e4f22b7e4b15d9ec7f7e0cb6c89fe87e93
 import com.biz.rbooks.service.ReadBookService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +32,6 @@ public class ReadBookController {
 
 	ReadBookService rbService;
 	BookService bService;
-<<<<<<< HEAD
 	MemberService mService;
 	
 	@Autowired
@@ -45,14 +40,13 @@ public class ReadBookController {
 		this.rbService = rbService;
 		this.bService = bService;
 		this.mService = mService;
-=======
+	}	
 	
 	@Autowired
 	public ReadBookController(ReadBookService rbService,BookService bService) {
 
 		this.rbService = rbService;
 		this.bService = bService;
->>>>>>> e58f25e4f22b7e4b15d9ec7f7e0cb6c89fe87e93
 	}
 
 	@ModelAttribute("rbDTO")
@@ -61,10 +55,7 @@ public class ReadBookController {
 		return new ReadBookDTO();
 	}
 	
-<<<<<<< HEAD
 	// 모든 독서록 리스트를 보여주는 method
-=======
->>>>>>> e58f25e4f22b7e4b15d9ec7f7e0cb6c89fe87e93
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public String list(Model model) {
 		
@@ -73,7 +64,6 @@ public class ReadBookController {
 		return null;
 	}
 	
-<<<<<<< HEAD
 	// 독서록 리스트 한개를 클릭했을때 나오는 detail 화면 method
 	@RequestMapping(value="/viewdetail", method=RequestMethod.GET)
 	public String viewdetail(@RequestParam("id") String rb_seq, @ModelAttribute("rbDTO") ReadBookDTO rbDTO, Model model) {
@@ -83,48 +73,27 @@ public class ReadBookController {
 		
 		return null;
 	}
-	
-	// 사용자 아이디(httpSession)/독서록 작성 날짜/도서명 세팅
-	@RequestMapping(value="/insert", method=RequestMethod.GET)
-	public String insert(@ModelAttribute("rbDTO") ReadBookDTO rbDTO, Model model, @ModelAttribute("bDTO") BookDTO bDTO, SessionStatus status, HttpSession httpSession) {
 
-=======
 	// 사용자 아이디(httpSession)/독서록 작성 날짜/도서명 세팅
 	@RequestMapping(value="/insert", method=RequestMethod.GET)
-	public String insert(@ModelAttribute("rbDTO") ReadBookDTO rbDTO, Model model, @ModelAttribute("bDTO") BookDTO bDTO, SessionStatus status, HttpSession httpSession) {
+	public String insert(@ModelAttribute("rbDTO") ReadBookDTO rbDTO, Model model, SessionStatus status, HttpSession httpSession) {
 		
-//		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("memberDTO");
-//		
-//		// 로그인 정보가 없으면
-//		if(memberDTO == null) {
-//			model.addAttribute("BODY", "LOGIN");
-//			// 재시도 메시지 보여주기
-//			model.addAttribute("LOGIN_MSG", "TRY");
-//			// 로그인 화면으로 redirect
-//			return "redirect:/member/login";
-//		}
-		
->>>>>>> e58f25e4f22b7e4b15d9ec7f7e0cb6c89fe87e93
 		// 날짜 세팅
 		Date date = new Date();
 		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 		rbDTO.setRb_date(sd.format(date));
 		
-<<<<<<< HEAD
 		// 오늘 날짜를 입력하지 않으면 오늘 날짜로 세팅해서 보내기
 		if(rbDTO.getRb_date().isEmpty()) {
 			rbDTO.setRb_date(sd.format(date));
 		}
 		
-=======
->>>>>>> e58f25e4f22b7e4b15d9ec7f7e0cb6c89fe87e93
 		log.debug("##rbDTO" + rbDTO.toString());
 		
 		status.setComplete();
 		
 		return "rbooks/insert";
 	}
-<<<<<<< HEAD
 
 	/*
 	 * insert POST가 rbDTO를 수신할 때 입력form에서 사용자가 입력한 값들이 있으면
@@ -136,9 +105,7 @@ public class ReadBookController {
 	 * 별도의 코딩을 하지 않아도 자동으로 insert POST로 전송되는 효과를 낸다.
 	 * 단, 이 기능을 효율적으로 사용하려면 jsp code에 Spring form tag로 input을 코딩해야한다. 
 	 */
-=======
 	
->>>>>>> e58f25e4f22b7e4b15d9ec7f7e0cb6c89fe87e93
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String insert(@ModelAttribute("rbDTO") ReadBookDTO rbDTO, SessionStatus status) {
 		
@@ -148,7 +115,6 @@ public class ReadBookController {
 		return "redirect:/rbooks/list";
 	}
 	
-<<<<<<< HEAD
 	// update GET method
 	/*
 	 * @RequestParam : ?변수=값  형식으로 전송하고 변수에서 수신
@@ -165,41 +131,31 @@ public class ReadBookController {
 		status.setComplete();
 		return "rbooks/insert";
 	}
+//	
+//	
+//	// update POST method
+//	@RequestMapping(value="/update", method=RequestMethod.GET)
+//	public String update(@ModelAttribute("rbDTO") ReadBookDTO rbDTO, Model model, @RequestParam("id") String rb_seq) {
+//		
+//		rbDTO = rbService.findByBCode(rb_seq);
+//		model.addAttribute("rbDTO", rbDTO);
+//		return "rbooks/list";
+//	}
 	
-	
-	// update POST method
-=======
-	@RequestMapping(value="/update", method=RequestMethod.GET)
-	public String update(@ModelAttribute("rbDTO") ReadBookDTO rbDTO, Model model, @RequestParam("id") String rb_seq) {
-		
-		rbDTO = rbService.findByBCode(rb_seq);
-		model.addAttribute("rbDTO", rbDTO);
-		return "rbooks/list";
-	}
-	
->>>>>>> e58f25e4f22b7e4b15d9ec7f7e0cb6c89fe87e93
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String update(@ModelAttribute("rbDTO") ReadBookDTO rbDTO, SessionStatus status) {
 		
 		rbService.update(rbDTO);
-<<<<<<< HEAD
 		
 		status.setComplete();
 		return "redirect:/rbooks/list";
-=======
-		status.setComplete();
-		return "redirect:/rbook/list";
->>>>>>> e58f25e4f22b7e4b15d9ec7f7e0cb6c89fe87e93
 	}
 	
 	
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public String delete(@ModelAttribute("rbDTO") ReadBookDTO rbDTO) {
 		
-<<<<<<< HEAD
 		// seq값을 받아서 삭제 수행
-=======
->>>>>>> e58f25e4f22b7e4b15d9ec7f7e0cb6c89fe87e93
 		rbService.delete(rbDTO.getRb_seq());
 		return "redirect:/rbooks/list";
 	}

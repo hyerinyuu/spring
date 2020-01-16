@@ -28,14 +28,10 @@ public class ReadBookService {
 		return rbDao.selectAll();
 	}
 	
-<<<<<<< HEAD
 	public ReadBookDTO findBySeq(String rb_seq) {
-		
 		return rbDao.findBySeq(rb_seq);
 	}
 	
-=======
->>>>>>> e58f25e4f22b7e4b15d9ec7f7e0cb6c89fe87e93
 	public ReadBookDTO findByBCode(String rb_bcode) {
 		return rbDao.findByBCode(rb_bcode);
 	}
@@ -51,9 +47,5 @@ public class ReadBookService {
 	public int delete(long rb_seq) {
 		return rbDao.delete(rb_seq);
 	}
-<<<<<<< HEAD
-	
-=======
->>>>>>> e58f25e4f22b7e4b15d9ec7f7e0cb6c89fe87e93
 
 }

@@ -6,12 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>나의 홈페이지</title>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link href="${rootPath}/css/rbook-main.css?ver=2020-01-14-001" rel="stylesheet"/>
-<link href="${rootPath}/css/main-table.css??ver=2020-01-14-001" rel="stylesheet" />
-<link href="${rootPath}/css/color.css??ver=2020-01-14-001" rel="stylesheet" />
-
+<%@ include file="/WEB-INF/views/include/include-head.jspf" %>
 <script>
 $(function(){
 	// ==  $("#btn-write").click(function(){})
