@@ -31,34 +31,17 @@
 		<h3>도서록 목록 추가</h3>
 	</div>
 </header>
-<<<<<<< HEAD
-=======
-
-RB_SEQ
-RB_BCODE
-RB_DATE
-RB_STIME
-RB_RTIME
-RB_SUBJECT
-RB_TEXT
-RB_STAR
-RB_BNAME
->>>>>>> e58f25e4f22b7e4b15d9ec7f7e0cb6c89fe87e93
 <div class="form-group">
 	<form:form modelAttribute="rbDTO" autocomplete="on" class="book-form">
 	<input name="rb_seq" type="hidden" value="<c:out value="${rbDTO.rb_seq}" default="0"/>">
 	
 		<label for="rb_bcode">ISBN</label>
-<<<<<<< HEAD
 		<form:input path="rb_bcode" class="form-control" placeholder="도서코드를 입력하세요"/><br/>
 		
 		<label for="rb_bname">도서명</label>
 		<form:input path="rb_bname" class="form-control" placeholder="도서명을 입력하세요"/><br/>
-=======
-		<form:input path="rb_bcode" class="form-control" id="rb_bcode" placeholder="도서코드를 입력하세요"/><br/>
 		
 		<input name="rb_bname" type="hidden" value="<c:out value="${rbDTO.rb_bname}" />">
->>>>>>> e58f25e4f22b7e4b15d9ec7f7e0cb6c89fe87e93
 		
 		<label for="rb_date">독서일자</label>
 		<form:input path="rb_date" class="form-control" placeholder="독서일자를 입력하세요"/><br/>
@@ -90,43 +73,6 @@ RB_BNAME
  })
  
  </script>
- 
-<!--   
-<section class="col-lg-4 col-md-5 col-sm-11">
 
-	<form class="was-validated" method="POST" enctype="multipart/form-data" action="${rootPath}/books/insert">
-
-	<div class="form-box">
-		<div class="form-group">
-		
-			<label for="b_code">도서코드</label>
-			<input type="text" class="form-control" placeholder="도서코드를 입력하세요" id="b_code" name="b_code"><br/>
-			
-			<label for="b_code">도서명</label>
-			<input type="text" class="form-control" placeholder="도서명을 입력하세요" id="b_name" name="b_name"><br/>
-			
-			<label for="b_auther">저자</label>
-			<input type="text" class="form-control" placeholder="저자를 입력하세요" id="b_auther" name="b_auther"><br/>
-			
-			<label for="b_comp">출판사</label>
-			<input type="text" class="form-control" placeholder="출판사를 입력하세요" id="b_comp" name="b_comp"><br/>
-			
-			<label for="b_year">발행일</label>
-			<input type="text" class="form-control" value="${bDTO.b_year}"  placeholder="도서 발행일 입력하세요" id="b_year" name="b_year"><br/>
-			
-			<label for="b_iprice">도서가격</label>
-			<input type="text" class="form-control" placeholder="도서 가격을 입력하세요" id="b_iprice" name="b_iprice"><br/>
-			
-			<button type="reset" class="btn btn-outline-warning btn-block">새로작성</button>
-			<button type="submit" id="btn-save" class="btn btn-outline-primary btn-block">저장</button>
-		
-		</div>	
-	</div>	
-	
-	
-	</form>
-</section>
- -->
- 
 </body>
 </html>

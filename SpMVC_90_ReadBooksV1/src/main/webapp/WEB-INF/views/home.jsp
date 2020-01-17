@@ -52,12 +52,6 @@ $(function(){
 	$("#btn-viewrblist").click(function(){
 		document.location.href = "${rootPath}/rbooks/list"
 	})
-<<<<<<< HEAD
-
-=======
-	
-	
->>>>>>> e58f25e4f22b7e4b15d9ec7f7e0cb6c89fe87e93
 	$(".content-body").click(function(){
 		let bcode = $(this).attr("data-id")
 		document.location.href="${rootPath}/books/viewdetail?bcode=" + bcode
@@ -68,11 +62,7 @@ $(function(){
 					
 <body>
 <header>
-<<<<<<< HEAD
 	<div class="jumbotron text-center" id="main-header">
-=======
-	<div class="jumbotron text-center">
->>>>>>> e58f25e4f22b7e4b15d9ec7f7e0cb6c89fe87e93
 		<h3>도서 리스트</h3>
 	</div>
 </header>
@@ -80,15 +70,7 @@ $(function(){
   
 <%@ include file="/WEB-INF/views/books/list.jsp"%>
 
-<<<<<<< HEAD
 <button type="button" id="btn-insert" class="btn btn-primary">도서정보추가</button>
-=======
-
-<button type="button" id="btn-insert">도서정보 추가</button>
-<button type="button" id="btn-rbinsert">독서록 추가</button>
-<button type="button" id="btn-viewrblist">독서록 리스트 보기</button>
-
->>>>>>> e58f25e4f22b7e4b15d9ec7f7e0cb6c89fe87e93
 
 </body>
 </html>

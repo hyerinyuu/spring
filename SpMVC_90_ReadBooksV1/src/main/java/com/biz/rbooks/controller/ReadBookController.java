@@ -41,13 +41,6 @@ public class ReadBookController {
 		this.bService = bService;
 		this.mService = mService;
 	}	
-	
-	@Autowired
-	public ReadBookController(ReadBookService rbService,BookService bService) {
-
-		this.rbService = rbService;
-		this.bService = bService;
-	}
 
 	@ModelAttribute("rbDTO")
 	public ReadBookDTO newRbDTO() {

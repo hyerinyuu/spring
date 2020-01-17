@@ -187,4 +187,8 @@ button:hover{
 	}
 }
 
+tbody td{
+	cursor: pointer;
+}
+
 

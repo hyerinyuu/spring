@@ -30,21 +30,14 @@ $(function(){
 			url += "list"
 			
 		}else if(btn_id == "btn-delete"){
+			if(!confirm("독서록을 삭제할까요?")){
+				return false
+			}
 			url += "delete/${RBOOK.rb_seq}"
 		}
-		
 		document.location.href = url
 		
 	})
-	
-	$("btn-update").click(function(){
-		
-		
-	})
-	
-	
-	
-	
 	
 })
 </script>
@@ -151,6 +144,8 @@ $(function(){
 	</article>
 
 </section>
+<%@ include file="/WEB-INF/views/rbooks/list-body.jsp" %>
+
 </body>
 
 </html>

@@ -64,6 +64,14 @@ public class MemberController {
 		// return "redirect:/books/list";
 	}
 	
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(HttpSession httpSession) {
+		httpSession.removeAttribute("MEMBER");
+		
+		return "redirect:/rbooks/list";
+		
+	}
+	
 	
 	
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -75,6 +76,10 @@ public class ReadBookController {
 		BookVO bookVO = bService.findByBCode(b_code);
 		
 		model.addAttribute("BOOK", bookVO);
+		
+		List<ReadBookVO> rBookList = rBookService.findByBCode(b_code);
+		model.addAttribute("RBOOKS", rBookList);
+		
 		return "rbooks/view";
 	}
 	
@@ -85,6 +90,21 @@ public class ReadBookController {
 		model.addAttribute("rBookVO", rBookVO);
 		
 		return "rbooks/input";
+	}
+	
+	@RequestMapping(value="/update/{rb_seq}", method=RequestMethod.POST)
+	public String update(@ModelAttribute ReadBookVO rBookVO) {
+
+		int ret = rBookService.update(rBookVO);
+		return "redirect:/rbooks/list";
+	}
+	
+	@RequestMapping(value="/delete/{rb_seq}", method=RequestMethod.GET)
+	public String delete(@PathVariable("rb_seq") String rb_seq) {
+		
+		int ret = rBookService.delete(Long.valueOf(rb_seq));
+		
+		return "redirect:/rbook/list";
 	}
 	
 }

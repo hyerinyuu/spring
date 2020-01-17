@@ -5,6 +5,22 @@
   
  <mapper namespace="com.biz.rbooks.repository.ReadBookDao">
  	
+ 	<select id="findByBCode" resultType="rBookVO">
+ 		SELECT 
+		    RB_SEQ,
+		    RB_BCODE,
+		    RB_BNAME,
+		    RB_DATE,
+		    RB_STIME,
+		    RB_RTIME,
+		    RB_SUBJECT,
+		    RB_TEXT,
+		    RB_STAR
+		FROM tbl_read_book R, tbl_books B
+		WHERE R.rb_bcode = #{b_code, jdbcType=VARCHAR}
+				AND R.rb_bcode = B.b_code
+ 	</select>
+ 	
  	<insert id="insert" parameterType="rBookVO">
  		INSERT INTO tbl_read_book(
 	 		RB_SEQ,
@@ -28,8 +44,5 @@
 			#{rb_bname,jdbcType=VARCHAR}
  		) 
  	</insert>
- 	
- 	<update id="update">
- 	</update>
  
  </mapper> 

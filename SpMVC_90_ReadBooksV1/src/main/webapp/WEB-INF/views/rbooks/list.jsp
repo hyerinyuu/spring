@@ -105,13 +105,14 @@ $(function(){
 
 					<c:otherwise>
 			
-						<c:forEach items="${RBLIST}" var="rbdto">
+						<c:forEach items="${RBLIST}" var="rbdto" varStatus="index">
 							<tr class="content-body" data-id="${rbdto.rb_seq}">
-								<td>${userDTO.m_id}</td> <!-- userDTO.m_id items안적어줘도됨 -->
+								<td>${index.count}</td>
+								<td>${MEMBER.m_id}</td> <!-- userDTO.m_id items안적어줘도됨 -->
 								<td>${rbdto.rb_bcode}</td>
 								<td>${rbdto.rb_bname}</td>
 								<td>${rbdto.rb_date}</td>
-								<td>${rbdto.rb_text}</td>
+								<td>${rbdto.rb_subject}</td>
 								<td>${rbdto.rb_star}</td>
 							</tr>
 						</c:forEach>
@@ -123,10 +124,5 @@ $(function(){
 
 <button type="button" id="btn-rbinsert" class="btn btn-primary">독서록 추가</button>
 
-<div class="btn-box"> 
-	<a href="javascript:void(0)" class="btn" id="btn-update">수정</a>
-	<a href="javascript:void(0)" class="btn" id="btn-delete">삭제</a>
-	<a href="javascript:void(0)" class="btn" id="btn-list">목록으로</a>
-</div>
 </body>
 </html>

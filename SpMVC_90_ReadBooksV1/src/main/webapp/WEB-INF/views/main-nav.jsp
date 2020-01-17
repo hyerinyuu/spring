@@ -32,13 +32,26 @@
 	      <a class="nav-link" href="${rootPath}/rbooks/list">독서록리스트</a>
 	    </li>
 	    
-	    <li class="nav-item">
-	      <a class="nav-link" href="${rootPath}/member/login">로그인</a>
-	    </li>
+	    <c:if test="${empty MEMBER}">
+		    <li class="nav-item">
+		      <a class="nav-link" href="${rootPath}/member/login">로그인</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="${rootPath}/member/join">회원가입</a>
+		    </li>
+	    </c:if>
 	    
-	    <li class="nav-item">
-	      <a class="nav-link" href="${rootPath}/member/join">회원가입</a>
-	    </li>
+	    <c:if test="${!empty MEMBER}">
+	    
+	    	 <li class="nav-item"> 	
+				<a class="nav-link">"${MEMBER.m_id}"님 안녕하세요!</a>	      
+		    </li>
+		    
+		    <li class="nav-item">
+		      	<a class="nav-link" href="${rootPath}/member/logout">로그아웃</a>
+		    </li>
+		   
+		</c:if>    
 	    
 	  </ul>
 	</nav>

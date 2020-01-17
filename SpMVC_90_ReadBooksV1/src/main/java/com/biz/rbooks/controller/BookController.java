@@ -51,17 +51,12 @@ public class BookController {
 	}
 	
 	@RequestMapping(value="/viewdetail", method=RequestMethod.GET)
-	public String viewdetail(@RequestParam("bcode") String b_code, @ModelAttribute("bDTO") BookDTO bDTO, 
-							@RequestParam("rb_bcode") String rb_bcode, @ModelAttribute("rbDTO") ReadBookDTO rbDTO, Model model) {
+	public String viewdetail(@RequestParam("bcode") String b_code, @ModelAttribute("bDTO") BookDTO bDTO, ReadBookDTO rbDTO, Model model) {
 		
 		bDTO = bService.findById(b_code);
-		rbDTO = rbService.findByBCode(rb_bcode);
 		
 		log.debug("rbDTO" + rbDTO);
-
 		model.addAttribute("bDTO", bDTO);
-		model.addAttribute("rbDTO", rbDTO);
-		
 		return null;
 	}
 	
