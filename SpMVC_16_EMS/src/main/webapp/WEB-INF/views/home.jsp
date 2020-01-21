@@ -18,8 +18,22 @@
 	</div>
 </header>
 <%@ include file="/WEB-INF/views/include/include-nav.jspf" %>
-<%@ include file="/WEB-INF/views/body/ems/list.jsp" %>
 
-<button class="btn btn-success" id="btn-send" onclick="location.href='${rootPath}/ems/input'">메일보내기</button>
+<c:choose>
+	<c:when test="${BODY == 'VIEW'}">
+		<%@ include file="/WEB-INF/views/body/ems/view.jsp" %>	
+	</c:when>
+	<c:when test="${BODY == 'WRITE'}">
+		<%@ include file="/WEB-INF/views/body/ems/write.jsp" %>	
+	</c:when>
+	<c:otherwise>
+		<%@ include file="/WEB-INF/views/body/ems/list.jsp" %>
+		<button class="btn btn-success" id="btn-send" onclick="location.href='${rootPath}/ems/input'">메일보내기</button>	
+	</c:otherwise>
+</c:choose>
+
+
+
+
 </body>
 </html>

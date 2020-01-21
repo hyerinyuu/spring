@@ -1,6 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<script>
+
+$(function(){
+	
+	$(".email-list").click(function(){
+		document.location.href = "${rootPath}/ems/view/" + $(this).data("seq")
+		
+	})
+	
+})
+
+</script>
 
 <section>
 	<div class="table-view">
@@ -24,14 +37,14 @@
 					</c:when>
 					
 					<c:otherwise>
-						<c:forEach items="${LIST}" var="VO" varStatus="in">
-							<tr class="content-body" data-id="${bdto.b_code}">
-								<td>${VO.b_code}</td>
-								<td>${VO.b_name}</td>
-								<td>${VO.b_auther}</td>
-								<td>${VO.b_comp}</td>
-								<td>${VO.b_year}</td>
-								<td>${VO.b_iprice}</td>
+						<c:forEach items="${LIST}" var="vo" varStatus="in">
+							<tr class="content-body email-list" data-seq="${vo.emsSeq}">
+								<td>${in.index}</td>
+								<td>${vo.fromEmail}</td>
+								<td>${vo.fromName}</td>
+								<td>${vo.subject}</td>
+								<td>${vo.sendDate}</td>
+								<td>${vo.sendTime}</td>
 							</tr>
 						</c:forEach>
 					</c:otherwise>

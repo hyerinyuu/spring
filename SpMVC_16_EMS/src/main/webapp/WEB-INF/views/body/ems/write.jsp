@@ -62,26 +62,19 @@ $(function(){
 		width: '100%',
 		toolbar: toolbar,
 		height: '200px',
-		disableDragAndDrop: false,
+		disableDragAndDrop: false, /* true => 파일 d&d 안됨*/
 	})
 	
 })
 
 </script>
 
-<header>
-	<div class="jumbotron text-center" style="margin-bottom:0">
-  		<h1>MY EMS</h1>
-	</div>
-</header>
-<%@ include file="/WEB-INF/views/include/include-nav.jspf" %>
-
 <fieldset class="email-write-box">
 	<form:form modelAttribute="emailVO"> <!--  enctype="multipart/form/data" -->
 		
 		<div class="form-group">
-			<label for="from_email">보내는 Email</label>
-			<form:input path="from_email" class="form-control" />
+			<label for="fromEmail">보내는 Email</label>
+			<form:input path="fromEmail" class="form-control" />
 		</div>
 		
 		<div class="form-group">
@@ -90,18 +83,18 @@ $(function(){
 		</div>
 		
 		<div class="form-group">
-			<label for="send_date">작성일자</label>
-			<form:input path="send_date"  class="form-control" />
+			<label for="sendDate">작성일자</label>
+			<form:input path="sendDate"  class="form-control" />
 		</div>
 		
 		<div class="form-group">
-			<label for="send_time">작성시각</label>
-			<form:input path="send_time"  class="form-control" />
+			<label for="sendTime">작성시각</label>
+			<form:input path="sendTime"  class="form-control" />
 		</div>
 		
 		<div class="form-group">
-			<label for="from_name">작성자</label>
-			<form:input path="from_name"  class="form-control"/>
+			<label for="fromName">작성자</label>
+			<form:input path="fromName"  class="form-control"/>
 		</div>
 		
 		<div class="form-group">

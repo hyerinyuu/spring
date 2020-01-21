@@ -23,25 +23,44 @@ public class MakeNaverSec {
 		
 		System.out.println("Salt Pass : " + saltPass);
 		
+		// Naver setting
 		System.out.print("Naver ID >> " );
 		String naverId = scanner.nextLine();
-		
 		System.out.print("Naver Password >> ");
 		String naverPass = scanner.nextLine();
+	
+		
+		// DB Setting
+		System.out.print("DB User >> " );
+		String dbUserId = scanner.nextLine();
+		System.out.print("DB Password >> " );
+		String dbPassword = scanner.nextLine();
+		
+		
 		
 		
 		// 암호화 설정 부분
 		pbEnc.setAlgorithm("PBEWithMD5AndDES");
 		pbEnc.setPassword(saltPass);
 		
+		// Naver Setting
 		String encNaverId = pbEnc.encrypt(naverId);
 		String encNaverPass = pbEnc.encrypt(naverPass);
 		
+		// DB Setting
+		String encDBUserId = pbEnc.encrypt(dbUserId);
+		String encDBPassword = pbEnc.encrypt(dbPassword);
+		
 		System.out.printf("Naver : %s, %s\n", naverId, naverPass);
 		System.out.printf("EncNaver : %s, %s\n", encNaverId, encNaverPass);
-		 
+
+		// Naver
 		String saveNaverId = String.format("naver.username=ENC(%s)", encNaverId);
 		String saveNaverPass = String.format("naver.password=ENC(%s)", encNaverPass);
+		
+		// DB
+		String saveDBUserID = String.format("mysql.user=ENC(%s)", encDBUserId);
+		String saveDBPassword = String.format("mysql.password=ENC(%s)", encDBPassword);
 		
 		String proFileName = "./src/main/webapp/WEB-INF/spring/naver.email.secret.properties";
 		
@@ -57,12 +76,17 @@ public class MakeNaverSec {
 		try {
 			// PrintWriter out = new PrintWriter(proFileName);
 			PrintWriter out = new PrintWriter(proFile);
+			
+			// Naver
 			out.println(saveNaverId);
-			out.print(saveNaverPass);
+			out.println(saveNaverPass);
+			
+			// DB 
+			out.println(saveDBUserID);
+			out.print(saveDBPassword);
 			
 			out.flush();
 			out.close();
-			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
