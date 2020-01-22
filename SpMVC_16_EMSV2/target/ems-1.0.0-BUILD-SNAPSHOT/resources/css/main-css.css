@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+/*
+	tag.class 또는 tag#id 형식으로 selector를 지정하는 이유
+	tag전체에 style을 입히지 않고
+	특정한 tag에 class나 id가 설정된 곳에만 style을 입힐 수 있음.
+*/
+	.navbar{
+		margin-bottom: 60px;
+	}
+	
+	.table-view{
+		width: 90%;
+		margin: 0 auto;
+	}
+	
+	#btn-send{
+		position: absolute;
+		right: 160px;
+		margin: 1rem;
+	}
+/*	
+	.navbar a:hover{
+		border-bottom: 0.8px solid white;
+		transition: 0.4s;
+	}
+*/	
