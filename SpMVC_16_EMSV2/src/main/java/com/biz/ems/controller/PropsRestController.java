@@ -32,6 +32,7 @@ public class PropsRestController {
 	@Value("${mysql.user}")
 	private String mysql_username;
 	
+	/*
 	@Value("#{app_props['app.name']}")
 	private String app_name;
 	
@@ -43,6 +44,7 @@ public class PropsRestController {
 	
 	@Value("#{res_props['app.res.since']}")
 	private String res_since;
+	*/
 
 	
 	@RequestMapping(value="/system", method=RequestMethod.GET)
@@ -60,6 +62,7 @@ public class PropsRestController {
 		
 	}
 	
+	/*
 	@RequestMapping(value="/app", method=RequestMethod.GET)
 	public String app() {
 		
@@ -73,6 +76,6 @@ public class PropsRestController {
 		String ret = String.format("app_res_name : %s, app_res_since : %s", res_name, res_since);
 		return ret;
 	}
-
+	*/
 	
 }

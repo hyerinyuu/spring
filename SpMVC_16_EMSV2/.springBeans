@@ -9,9 +9,13 @@
 	<configs>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/naver-send-mail-context.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/ems-hibernate-context.xml</config>
-		<config>src/main/webapp/WEB-INF/spring/appServlet/app-props-context.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/props/app-props-context2.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/jasypt-context.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/mybatis1-context.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/root-context.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

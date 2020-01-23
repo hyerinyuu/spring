@@ -15,8 +15,10 @@ public class NaverLoginService {
 
 	private final String clientId = "gfAl05jY6CFkmHuTd7d6";
 	private final String loginAPI_URL = "https://nid.naver.com/oauth2.0/authorize";
-	private final String callbackLocalURL = "https://callor.com:12600/ems/naver/ok";
-	private final String callbackURL = "http://localhost:8080/ems/naver/ok";
+	
+	private final String calllocalbackURL = "http://localhost:8080/ems_hyerinyu/member/naver/ok";
+	private final String callbackURL = "https://callor.com:12600/ems_hyerinyu/member/naver/ok";
+
 	
 	
 	public String oAuthLoginGet() {
@@ -40,6 +42,7 @@ public class NaverLoginService {
 		
 		String apiURL = loginAPI_URL;
 		apiURL += "?client_id=" + clientId;
+		apiURL += "&response_type=code";
 		apiURL += "&redirect_uri=" + redirectURI;
 		apiURL += "&state=" + stateKey;
 		

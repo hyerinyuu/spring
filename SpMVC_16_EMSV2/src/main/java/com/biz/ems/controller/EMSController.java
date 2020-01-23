@@ -80,9 +80,11 @@ public class EMSController {
 	}
 	
 	@RequestMapping(value="/view/{ems_seq}", method=RequestMethod.GET)
-	public String view(@ModelAttribute("emailVO") EmailVO emailVO, @PathVariable("ems_seq") String ems_seq, Model model) {
+	public String view(@ModelAttribute("emailVO") EmailVO emailVO, @PathVariable("ems_seq") String ems_seq, Model model, SessionStatus status) {
 		
 		emailVO = mailService.findBySeq(Long.valueOf(ems_seq));
+		
+		status.setComplete();
 		
 		model.addAttribute("BODY", "VIEW");
 		model.addAttribute("emailVO", emailVO);
