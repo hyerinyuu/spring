@@ -1,9 +1,10 @@
+C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\domain\NaverTokenVO.java
 C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\controller\MemberController.java
 C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\mapper\MybatisEmailDao.java
 C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\utils\CustomPhysicalNamingStrategyV2.java
 C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\controller\MybatisRestController.java
 C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\domain\EmailVO.java
-C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\domain\NaverLoginOK.java
+C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\domain\NaverMemberResponse.java
 C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\controller\HomeController.java
 C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\controller\PropsRestController.java
 C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\repository\EmailDao.java
@@ -13,6 +14,9 @@ C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\controller\EMSCo
 C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\service\SendMailService.java
 C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\EmailVO2.java
 C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\utils\CustomPhysicalNamingStategy.java
+C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\config\NAVER.java
+C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\domain\NaverMember.java
 C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\Main.java
 C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\service\MyBatisService.java
 C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\MakeNaverSec.java
+C:\bizwork\springworks\SpMVC_16_EMSV2\src\main\java\com\biz\ems\domain\NaverReturnAuth.java
