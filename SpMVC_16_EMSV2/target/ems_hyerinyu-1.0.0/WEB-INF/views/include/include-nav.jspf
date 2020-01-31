@@ -36,11 +36,24 @@
     <li class="nav-item active">
       <a class="nav-link a-menu" data-menu="bbs/notice" href="javascript:void(0)">공지사항</a>
     </li>
-    <li class="nav-item active">
-      <a class="nav-link a-menu" data-menu="member/login" href="javascript:void(0)">로그인</a>
-    </li>
-    <li class="nav-item active">
-      <a class="nav-link a-menu" data-menu="member/join" href="javascript:void(0)">회원가입</a>
-    </li>
+
+	<c:if test="${empty MEMBER}" >  
+	    <li class="nav-item active">
+	      <a class="nav-link a-menu" data-menu="member/login" href="javascript:void(0)">로그인</a>
+	    </li>
+	    <li class="nav-item active">
+	      <a class="nav-link a-menu" data-menu="member/join" href="javascript:void(0)">회원가입</a>
+	    </li>
+	</c:if>   
+    
+    <c:if test="${!empty MEMBER}">
+	    <li class="nav-item active">
+	      <a class="nav-link a-menu" data-menu="member/logout" href="javascript:void(0)">로그아웃</a>
+	    </li>
+	    <li class="nav-item active">
+	      <a class="nav-link a-menu" data-menu="member/logout" href="javascript:void(0)">${MEMBER.nickname}(${MEMBER.email})</a>
+	    </li>
+	</c:if>    
+    
   </ul>
 </nav>
