@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/jdbc https://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- dataSource -->
+	<bean id="mysqlDS" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/emsDB?serverTime=Asia/Seoul"/>
+		<property name="username" value="${mysql.user}"/>
+		<property name="password" value="${mysql.password}"/> 
+	</bean>
+	
+	<!--  
+		SqlSessionFactory
+		
+		jdbcTypeForNull = 부적절한 열유형1111 방지를 위한 ,jdpcType=VARCHAR 자동으로 붙여줌
+		mapUnderscoreToCamelCase = true: snake case => camel case
+								   false: 변수를 그냥 그대로 사용하라
+		logPrefix = log 찍을때 자동으로 앞에 value로 넣어놓은 값을 포함하라						    
+	-->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="mysqlDS"/>
+		<property name="typeAliasesPackage" value="com.biz.bbs.domain" />
+		<property name="mapperLocations" value="/WEB-INF/spring/mapper/*-mapper.xml" />
+		<property name="configuration">
+			<bean class="org.apache.ibatis.session.Configuration">
+				<property name="cacheEnabled" value="true"/>
+				<property name="defaultExecutorType" value="REUSE" />
+				<property name="jdbcTypeForNull" value="VARCHAR" />
+				<property name="mapUnderscoreToCamelCase" value="false" />
+				<property name="logPrefix" value="마이바티스 : " />
+			</bean>
+		</property>
+	</bean>
+
+	<!--  내부에서 transaction annotaion 을 이용해서 transaction 수행 -->
+	<tx:annotation-driven/>
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="mysqlDS" />
+	</bean>
+	
+	<!--  xml방식과 Annotation방식을 둘 다 사용하기 위해서 mapper를 두개 다 설정함
+		(property의 mapper location과 mybatis-spring:scan) -->
+	<mybatis-spring:scan base-package="com.biz.bbs.mapper"/>
+
+</beans>
