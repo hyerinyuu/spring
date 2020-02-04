@@ -23,7 +23,7 @@ public class HomeController {
 		model.addAttribute("MENUS", mDao.getAllMenu());
 		log.debug(mDao.getAllMenu().toString());
 		
-		return "home";
+		return "redirect:/bbs/list";
 	}
 	
 }

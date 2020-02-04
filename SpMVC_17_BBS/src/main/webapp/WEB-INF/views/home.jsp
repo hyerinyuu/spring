@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
@@ -8,60 +8,88 @@
 <meta charset="UTF-8">
 <title>나의 홈페이지</title>
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <!-- jQuery library -->
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 <style>
-	body{
-		border: 1px solid #aaa;
-	}
-	
 	header {
 		width: 95%;
 		border-radius: 8px;
 		margin: 0 auto;
 		margin-top: 2rem;
 	}
+	
+	#btn-write{
+		color: white;
+	}
+	
+	#navigation-bar{
+		border-radius: 5px;
+	}
 </style>
 
 <script>
-$(function(){
-	
-	$("#btn-write").click(function(){
-		document.location.href="${rootPath}/bbs/write"
+	$(function() {
+
+		$("#btn-write").click(function() {
+			document.location.href = "${rootPath}/bbs/input"
+		})
+
 	})
-	
-})
-
-
 </script>
 
 </head>
 
-<header class="jumbotron text-center" >
+<header class="jumbotron text-center">
 	<h3>Build Board System</h3>
 </header>
 
-<ul class="nav">
-	<li class="nav-item active"><a class="nav-link" href="${rootPath}/">Home</a></li>
-	<li class="nav-item active justify-content-end">
-    	<a class="nav-link" href="/member/login">Login</a>
-    </li>
-    <li class="nav-item active">
-    	<a class="nav-link" href="/member/join">Join</a>
-  	</li>
-</ul>
+
+<div id="navigation-bar">	
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<ul class="navbar-nav">
+			<li class="nav-item active">
+				<a class="nav-link" href="${rootPath}/">Home</a>
+			</li>
+			<li class="nav-item active justify-content-end">
+				<a class="nav-link" href="${rootPath}/member/login">Login</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" href="${rootPath}/member/join">Join</a>
+			</li>
+		</ul>
+	</nav>
+</div>		
 
 <body class="container-fluid">
-	<div class="input-group">
-		<div class="input-group-btn">
-			<button class="btn btn-default" id="btn-write" type="button">게시판 작성</button>
-		</div>	
-	</div>
+
+	<section>
+		<c:choose>
+			<c:when test="${BODY == 'BBS_INPUT'}">
+				<%@ include file="/WEB-INF/views/include/bbs_input.jsp"%>
+			</c:when>
+			<c:when test="${BODY == 'BBS_VIEW'}">
+				<%@ include file="/WEB-INF/views/include/bbs_view.jsp"%>
+			</c:when>
+			<c:otherwise>
+				<%@ include file="/WEB-INF/views/include/bbs_list.jsp"%>
+				<div class="input-group">
+					<div class="btn btn-primary ml-auto">
+						<button class="btn btn-default" id="btn-write" type="button">게시판작성</button>
+					</div>
+				</div>
+			</c:otherwise>
+		</c:choose>
+	</section>
+
+
 </body>
 </html>
