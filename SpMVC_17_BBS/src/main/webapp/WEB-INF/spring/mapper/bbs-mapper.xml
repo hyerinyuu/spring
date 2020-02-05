@@ -11,7 +11,7 @@
 	
 	<resultMap type="bbsVO" id="bbsReply">
 		<id column="bbs_id" property="bbs_id" />
-		<result column="bbs_id" property="bbs_id" />
+		<result column="bbs_id" property="bbs_id"/>
 		<collection property="bbs_reply" column="bbs_id" ofType="bbsVO"  select="selectSub"/>
 	</resultMap>
 	

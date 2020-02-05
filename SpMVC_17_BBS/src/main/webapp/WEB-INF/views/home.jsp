@@ -8,17 +8,17 @@
 <meta charset="UTF-8">
 <title>나의 홈페이지</title>
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <!-- jQuery library -->
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- Popper JS -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- Latest compiled JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<!--  summernote -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
+<script src="${rootPath}/js/summernote-ko-KR.min.js"></script>
 <style>
 	header {
 		width: 95%;
@@ -39,10 +39,32 @@
 <script>
 	$(function() {
 
+		var toolbar = [
+			['style',['bold', 'italic', 'underline'] ],
+			['fontsize',['fontsize']],
+			['font Style',['fontname']],
+			['color', ['color']],
+			['para',['ul','ol','paragragh']],
+			['height',['height']],
+			['table', ['table']],
+			['insert', ['link','hr', 'picture']],
+			['view', ['fullscreen', 'codeview']]
+			
+			]
+		
 		$("#btn-write").click(function() {
 			document.location.href = "${rootPath}/bbs/input"
 		})
 
+		$("#bbs_content").summernote({
+			lang: "ko-KR",
+			height: '200px',
+			toolbar: toolbar,
+			disableDragAndDrop: false
+			
+		})
+		
+		
 	})
 </script>
 

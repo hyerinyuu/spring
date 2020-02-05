@@ -9,6 +9,10 @@
 	.bbslist{
 		margin-top: 2rem;
 	}
+	
+	table tr td{
+		cursor: pointer;
+	}
 </style>
 
 <script>
