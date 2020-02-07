@@ -43,15 +43,31 @@ public class MovieCrawlService {
 	}
 	
 	/*
-	 * 
+	 * fixedRate : 바로 이전 스케줄링이 시작된 이후에 다시 시작할 시점
+	 * fixedDelay : 바로 이전 스케줄링이 종료된 이후 다시 시작할 시점
 	 */
+	
+	// @Scheduled(fixedRate = 100000)
 	@Scheduled(fixedDelay = 100000)
+	
+	/*
+	 * Unix 시스템에서는 일정한 시간(년,월,일,시,분,초)를 지정해서
+	 * 어떤 이릉ㄹ 정기적으로 수행할 때
+	 * cron tab이라는 기능을 이용해서 작업을 지정할 수 있다.
+	 * 초, 분, 시, 일, 월, 요일, 년
+	 */
+	//@Scheduled(cron = "0 30 1 * * *")
 	public void naverMovieGet() {
 		List<NaverMovieVO> naverList = this.movieRankGet();
 		nDao.deleteAll();
+		// bulk insert로 update
+		nDao.insertAll(naverList);
+		
+		/*
 		for(NaverMovieVO vo : naverList) {
 			nDao.insert(vo);
 		}
+		*/
 	}
 	
 	public List<NaverMovieVO> movieRankGet() {

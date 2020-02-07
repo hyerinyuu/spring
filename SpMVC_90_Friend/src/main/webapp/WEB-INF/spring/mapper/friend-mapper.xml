@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.biz.friend.persistence.FriendDao">
+ 	 	
+ 	<select id="findByName" resultType="fVO">
+ 		SELECT * FROM tbl_friend
+ 		WHERE F_NAME LIKE CONCAT('%', #{f_name} , '%')
+ 	</select>
+ 	
+ 	<select id="findByTel" resultType="fVO">
+ 		SELECT * FROM tbl_friend
+ 		WHERE F_TEL LIKE CONCAT('%', #{f_tel} , '%')
+ 	</select>
+ 	
+ 	<insert id="insert">
+ 		INSERT INTO `tbl_friend`(
+			`F_NAME`,
+			`F_TEL`,
+			`F_ADDR`,
+			`F_HOBBY`,
+			`F_REL`
+		)VALUES(
+			#{f_name},
+			#{f_tel},
+			#{f_addr},
+			#{f_hobby},
+			#{f_rel})
+ 	</insert>
+ 	
+ 	<update id="update">
+ 		UPDATE `tbl_friend` SET
+			`F_NAME` = #{f_name},
+			`F_TEL` = #{f_tel},
+			`F_ADDR` = #{f_addr},
+			`F_HOBBY` = #{f_hobby},
+			`F_REL` = #{f_rel}
+		WHERE `F_ID` = #{f_id}
+ 	</update>
+ 	
+ </mapper> 
