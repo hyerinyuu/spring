@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %> 
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <c:set var="rootPath" value="${pageContext.request.contextPath}"></c:set>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script> 
 <style>
@@ -151,7 +153,7 @@
 	})
 </script>
 
-<form method="POST" action="${rootPath}/login" class="login-form">
+<form:form method="POST" action="${rootPath}/login" class="login-form">
 	<h2>LOGIN</h2>
 	
 	<c:if test="${param.error != null}">
@@ -171,10 +173,14 @@
 		<h3>작성자만이 볼 수 있음!!</h3>
 	</c:if>
 	
-	<input type="hidden"name="${_csrf.parameterName}" value="${_csrf.token}">
-	<input type="text" id="id" name="id" placeholder="userID">
+	<%
+	/*
+		<input type="hidden"name="${_csrf.parameterName}" value="${_csrf.token}">
+	*/
+	 %>
+	<input type="text" id="id" name="username" placeholder="userID">
 	<input type="password" id="password" name="password" placeholder="password">
 	<button type="submit" id="btn-login">SIGN IN</button>
 	<button type="button" id="btn-join">SIGN UP</button>
 	
-</form>
+</form:form>

@@ -39,11 +39,11 @@ $(function(){
 		
 		<!--  로그인이 되지 않았을때만 로그인 메뉴 보이기(로그인 된 상태면 안보임) -->
 		<sec:authorize access="isAnonymous()">
-			<li class="nav-item"><a class="nav-link" href="${rootPath}/login">SignIn</a></li>
+			<li class="nav-item"><a class="nav-link" href="${rootPath}/auth/login">SignIn</a></li>
 		</sec:authorize>	
 		
 		<sec:authorize access="isAuthenticated()" >
-			<form id="logout" method="POST" action="${rootPath}/logout">
+			<form id="logout" method="POST" action="${rootPath}/auth/logout">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 				<li class="nav-item"><a href="#" class="nav-link logout">Sign Out</a></li>
 			</form>
