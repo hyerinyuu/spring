@@ -12,7 +12,7 @@
 	box-sizing: border-box;
 }
 
-.login-form {
+.join-form {
 	width: 400px;
 	padding: 40px;
 	
@@ -28,14 +28,14 @@
 	
 }
 
-.login-form h2 {
+.join-form h2 {
 		
 	color: gray;
 	font-weight: bold;
 	font-size: 36px;
 }
 
-.login-form h3 {
+.join-form h3 {
 		
 	color: black;
 	font-weight: bold;
@@ -45,7 +45,7 @@
 }
 
 
-.login-form input {
+.join-form input {
 	
 	background: none;
 	margin: 10px auto;
@@ -59,7 +59,7 @@
 	transition: 0.2s;
 }
 
-.login-form button {
+.join-form button {
 	border: 2px solid #2ECC71;
 	
 	padding: 14px 40px;
@@ -77,37 +77,16 @@
 	cursor: pointer;
 }
 
-.login-form input:focus {
+.join-form input:focus {
 	
 	width: 280px;
 	border-color: #2ECC71;
 	
 }
 
-.login-form button:hover{
+.join-form button:hover{
 	background-color: #2ECC71;
 	
-}
-
-/*
-	div box에 image를 2개 가져와서
-	초록색 버튼만 보여준 다음 hover시에 display를 inlineblock으로 설정해
-	흰색으로 바뀌는것처럼 표현
-*/
-.naver_login img {
-	border-radius: 7px;
-}
-
-.naver_login img:last-child {
-	display: none;
-}
-
-.naver_login:hover img:first-child{
-	display: none;
-}
-
-.naver_login:hover img:last-child {
-	display: inline-block;
 }
 
 </style>
@@ -115,66 +94,48 @@
 <script>
 	
 	$(function(){
-		$("#btn-join").click(function(){
-			document.location.href="${rootPath}/auth/join"
-		})
 			
-		$("#btn-login").click(function(){
+		$("#btn-join").click(function(){
 			
 			// 유효성 검사
 			// id, password가 입력되지 않았을 때 경고
-			let u_id = $("#u_id").val()
-			if(u_id == ""){
+			let username = $("#username")
+			let password = $("#password")
+			let re_password = $("#re_password")
+			
+			if(username.val() == ""){
 				alert("아이디를 입력하세요")
-				$("#u_id").focus
-				return false
+				username.focus()
+				return false;
+			}
+			if(password.val() == ""){
+				alert("비밀번호를 입력하세요")
+				password.focus()
+				return false;
 			}
 			
-			var params = $("form").serialize();
-			$.ajax({
-				url : "${rootPath}/member/login",
-				type : 'POST',
-				data: params,
-				success:function(result){
-					if(result == "LOGIN_OK"){
-						document.location.href="${rootPath}/"
-					}
-					 
-				}
-			})
+			if(re_password.val() == ""){
+				alert("비밀번호 확인을 입력하세요")
+				re_password.focus()
+				return false;
+			}
 			
+			if(password.val() != re_password.val()){
+				alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.")
+				password.focus()
+				return false;
+			}
+			
+			$("form").submit()
 		})
 	})
 </script>
 
-<form:form method="POST" action="${rootPath}/login" class="login-form">
-	<h2>LOGIN</h2>
-	
-	<c:if test="${param.error != null}">
-		<h3>아이디 혹은 비밀번호를</h3> 
-		<h3>다시 확인하시고 입력해주세요</h3>
-	</c:if>
-	
-	<c:if test="${LOGIN_MSG == 'TRY'}">
-		<h3>login required</h3>
-	</c:if>
-	
-	<c:if test="${LOGIN_MSG == '0'}">
-		<h3>WELCOME</h3>
-	</c:if>
-
-	<c:if test="${LOGIN_MSG == 'NO_AUTH'}">
-		<h3>작성자만이 볼 수 있음!!</h3>
-	</c:if>
-	
-	<%
-	/*
-		<input type="hidden"name="${_csrf.parameterName}" value="${_csrf.token}">
-	*/
-	 %>
+<form:form method="POST" action="${rootPath}/auth/join" class="join-form">
+	<h2>JOIN</h2>
 	<input type="text" id="id" name="username" placeholder="userID">
 	<input type="password" id="password" name="password" placeholder="password">
-	<button type="submit" id="btn-login-s">SIGN IN</button>
+	<input type="password" id="re_password" name="re_password" placeholder="check password">
 	<button type="button" id="btn-join">SIGN UP</button>
 	
 </form:form>

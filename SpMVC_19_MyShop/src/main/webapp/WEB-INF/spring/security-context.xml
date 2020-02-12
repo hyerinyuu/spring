@@ -7,6 +7,11 @@
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security-5.2.xsd">
 
+<!--  
+	* id값이 다르면 오류가 나기 때문에 PasswordEncoder를 복사해서 P만 소문자로 바꿔주기
+	* 기본값이 4이며 안넣어도 상관 없음.(4번 반복해서 더 강력하게 암호화 하라) 
+-->
+
 <!--  security 설정 
 	root Context와 같은 위치에 생성해야함
 	
@@ -23,13 +28,43 @@
 	</security:authentication-provider>
 </security:authentication-manager>
 
+<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+	<constructor-arg index="0" value="4" ></constructor-arg>
+</bean>
+
+<!--  rolePrefix : ROLE_ADMIN // db에 admin으로 저장했으면 value에 ADMIN을 넣어주면 앞에 ROLE 문자열을 prefix해줌 -->
+<bean id="secureJDBC" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
+	<property name="dataSource" ref="emsHiber"/>
+	<property name="rolePrefix" value=""/>
+	<property name="usersByUsernameQuery">
+		<value>
+			SELECT username, password, enabled FROM users WHERE username=?		
+		</value>
+	</property>	
+	<property name="authoritiesByUsernameQuery">
+		<value>
+			SELECT username, authority FROM authorities WHERE username=?		
+		</value>
+	</property>
+</bean>
+
+<!-- 
+	data-source-ref="emsHiber"
+	users-by-username-query="SELECT username, password, enabled FROM users WHERE username=?"
+	authorities-by-username-query="SELECT username, authority FROM authorities WHERE username=?"/>
+ -->
+
 <!--  DB에서 사용자 정보 불러오기 -->
 <security:authentication-manager>
-	<security:authentication-provider>
-		<security:jdbc-user-service data-source-ref="emsHiber"/>
+	<security:authentication-provider user-service-ref="secureJDBC">
+		<security:password-encoder ref="passwordEncoder"/>
 	</security:authentication-provider>
 </security:authentication-manager>
 
+<bean class="com.biz.shop.service.CustomAuthProvider" id="customAuth" />
+<security:authentication-manager>
+	<security:authentication-provider ref="customAuth"/>
+</security:authentication-manager>
 <!--  
 	intercept-url
 	spring security를 통해서 접근할 url(path)를 설정 
@@ -65,7 +100,7 @@
 						 
 						 authentication-failure-url="/auth/login?error"
 						 
-						 default-target-url="/"
+						 default-target-url="/auth/login_ok"
 						 username-parameter="username"
 						 password-parameter="password"/>
 						 
